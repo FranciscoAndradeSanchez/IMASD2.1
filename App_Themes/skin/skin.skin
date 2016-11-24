@@ -1,0 +1,48 @@
+<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+<asp:TextBox runat="server" Font-Names="Arial, Verdana" Font-Size="9pt" ForeColor="Black"/>
+<asp:DropDownList runat="server" Font-Names="Arial, Verdana" Font-Size="9pt" ForeColor="Black" />
+<asp:CheckBoxList runat="server" Font-Names="Arial, Verdana" Font-Size="9pt" ForeColor="WhiteSmoke" />
+<asp:HyperLink runat="server"  Font-Names="Arial" Font-Size="9pt" Font-Bold="True" Font-Underline="True" ForeColor="WhiteSmoke" />
+<asp:ImageButton runat="server" ImageAlign="AbsMiddle" />
+<asp:ValidationSummary runat="server" DisplayMode="List" ForeColor="Gold"  Font-Names="Arial" Font-Size="9pt" />
+<asp:RequiredFieldValidator runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="Gold"  />
+<asp:CustomValidator runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="Gold" />
+<asp:RangeValidator runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="Gold" />
+<asp:RegularExpressionValidator runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="Gold"/>
+<asp:Calendar runat="server" BackColor="Beige" BorderColor="White"
+                BorderWidth="1px" Font-Names="Verdana" Font-Size="X-Small" ForeColor="Black" Height="190px"
+                NextPrevFormat="FullMonth" Width="350px"  DayNameFormat="Short">
+                <SelectedDayStyle BackColor="Beige" ForeColor="Black" />
+                <TodayDayStyle BackColor="OliveDrab" ForeColor="White"/>
+                <OtherMonthDayStyle ForeColor="#999999" />
+                <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" VerticalAlign="Bottom" />
+                <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="Black" BackColor="Beige" HorizontalAlign="Center" />
+                <TitleStyle BackColor="OliveDrab" Font-Bold="True"
+                Font-Size="12pt" ForeColor="White" HorizontalAlign="Center" />
+                <DayStyle BackColor="White" HorizontalAlign="Center" />
+                <WeekendDayStyle BackColor="Beige" HorizontalAlign="Center" />
+</asp:Calendar>
+<asp:GridView runat="server" HorizontalAlign="Center" BorderWidth="0px">
+    <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
+    <RowStyle CssClass="tablaItemTemplate" />
+    <SelectedRowStyle CssClass="tablaItemTemplate" />
+    <PagerStyle HorizontalAlign="Center" Font-Bold="True" ForeColor="White" BackColor="OliveDrab" />
+    <HeaderStyle HorizontalAlign="Center" Font-Bold="True" ForeColor="White" BackColor="OliveDrab" />
+    <AlternatingRowStyle CssClass="tablaAlternatigTemplate" />
+    <EmptyDataRowStyle CssClass="tablaAlternatigTemplate" />
+</asp:GridView>
+<asp:FileUpload runat="server" Width="350px" Font-Names="Arial, Verdana" Font-Size="9pt" ForeColor="Black"/>
