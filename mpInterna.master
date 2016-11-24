@@ -1,0 +1,129 @@
+<%@ Master Language="VB" CodeFile="mpInterna.master.vb" Inherits="mpInterna" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Sistema de Control</title>
+    <link href="estilos.css" rel="stylesheet" type="text/css" />
+    <link href="css/estilo2014.css" rel="stylesheet" type="text/css" />
+    <%-- <link href="https://framework-gb.cdn.gob.mx/favicon.ico" rel="shortcut icon" />
+    <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet"/>--%>
+    <asp:ContentPlaceHolder ID="cphCabecera" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+<form id="form1" runat="server">
+<div class="cuerpo_pagina">
+
+    <div class="contenedor">
+        <%--<div class="row"> <div class="cabecera"></div></div>--%>
+          <div id="logos" class="logotipos" style="width:100%; height:90px;" >                                 
+                                <ul id="listado1" >
+                                    <li style="float:left; width:450px;"><div class="encabezado_titulo" ><h3>Sistema de Control y Seguimiento de Proyectos de Desarrollo, Transferencia de Tecnología e Investigación</h3></div></li>
+                                    <li style="width: 50%; float: right; height: 90px; margin-top: 10px;">
+                                        <ul id="listado2" style="float:right;">
+                                            <li ><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="images/2014/semarnat_150.png" width="25%" height="10%" alt=""  /></a></li>
+                                            <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="images/2014/CONAFOR_150.png"  width="25%" height="10%" alt=""/></a></li>
+                                            <li ><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="images/2014/CONACYT.png" width="25%" height="10%" alt="" /></a></li>
+                                        </ul>
+                                    </li>
+                                        
+                                </ul>
+                    </div>
+        <br />
+        <br />
+            <asp:Panel ID="idpnlEncabezado" runat="server" CssClass="encabezadoInterno" Visible="false"></asp:Panel>
+            <div class="menu">
+                <asp:Menu ID="mnuAplicacion" runat="server" Orientation="Horizontal" StaticPopOutImageUrl="~/images/aplicacion/felchamenu.gif" DynamicVerticalOffset="5" DynamicPopOutImageUrl="~/images/aplicacion/felchamenu.gif" StaticEnableDefaultPopOutImage="False">
+                    <StaticMenuItemStyle HorizontalPadding="5px" />
+                    <DynamicMenuStyle CssClass="elementoMenu" Width="150px" />
+                    <DynamicHoverStyle CssClass="elementoMenuHover" Width="150px" />
+                    <DynamicSelectedStyle ItemSpacing="5px" />
+                    <DynamicMenuItemStyle ItemSpacing="2px" VerticalPadding="0px" />
+                    <StaticHoverStyle CssClass="elementoMenuHover" />
+                    <DynamicItemTemplate>
+                        <%# Eval("Text") %>
+                    </DynamicItemTemplate>
+                </asp:Menu>
+            </div>
+        <%--<nav class="navbar navbar-inverse sub-navbar navbar-fixed-top">
+              <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
+                    <span class="sr-only">Interruptor de Navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/">Semarnat</a>
+                </div>
+                <div class="collapse navbar-collapse" id="subenlaces">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Enlace</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Desplegable <span class="caret"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Acción</a></li>
+                        <li><a href="#">Otra acción</a></li>
+                        <li><a href="#">Algo más aquí</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Enlace separado</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+        </nav>--%>
+        </div>
+     <br />
+        <br />
+        <div class="row"> 
+        <!-- *************************  CONTENIDO ************************* -->
+        <asp:contentplaceholder id="cphPrincipalInterna" runat="server"></asp:contentplaceholder>
+        <!-- *************************  /CONTENIDO ************************* -->
+        </div>
+
+
+
+    <div class="row"> 
+        <div class="row-pie"> 
+                        
+                                <div class="pie">
+                                    <p style="text-align:left;">
+                                        <span  class="contactanos"><a href="Contactanos.aspx"><strong>Para envío de comentarios y sugerencias en general hacer clic en Contáctanos</strong> <img src="images/2014/contacto.png" alt="Contacto" /></a></span>
+                                    </p>
+                                    <br />
+                                    <ul class="listado3"  >                                          
+                                                                                                              
+                                           <li ><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/twiter.png" width="30" height="30" alt=""  /></a></li>
+                                           <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/facebook.jpg"  width="30" height="30" alt=""/></a></li>
+                                           <li ><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/watts.jpg"  width="30" height="30" alt="" /></a></li>      
+                                           <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/hotmail.png"  width="30" height="30" alt=""/></a></li>  
+                                    </ul>
+                                    <br />
+                                    <br />
+                                    <small>Gerencia de Desarrollo y Transferencia de Tecnología. 
+                                        Comisión Nacional Forestal. Carretera Nogales Esq. Periférico pte. #5360 Col. San Juan de Ocotán 
+                                        Zapopan, Jalisco, http://www.conafor.gob.mx
+                            
+                                    </small>
+                                </div>
+                           
+                                <div class="enlaces" style="top: 0px; left: 0px;">
+		              	            <ul>      
+                                                        <li ><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/redes.jpg" width="30%" height="80" alt=""  /></a></li>
+                                                        <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/CEVMF.jpeg"  width="30%" height="80" alt=""/></a></li>
+                                                        <li ><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/revista.jpg"  width="30%" height="80" alt="" /></a></li>                           
+                                   
+                                    </ul>
+		                        </div>
+                           
+                     </div><!-- /row-pie-->
+    </div><!-- /row-->
+
+    </div> <!-- /contenedor -->
+</div> <!-- /cuerpo_pagina -->
+</form>
+     <%--<script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>--%>
+</body>
+</html>
