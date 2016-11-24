@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>CrystalReportsWeb</id>
+    <version>13.0.9.1312</version>
+    <title>CrystalReportsWeb 13.0.9.1312</title>
+    <authors>ocofre</authors>
+    <owners>ocofre</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Crystal report references to vs2013 in web proyect</description>
+    <summary />
+    <copyright>2016</copyright>
+  </metadata>
+</package>
