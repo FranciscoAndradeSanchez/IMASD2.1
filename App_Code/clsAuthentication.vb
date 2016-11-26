@@ -488,8 +488,9 @@ Public Class clsAuthentication
         envcCorreo.destinatarios = Email
         sltdhRandomStr.Original = Email
         sltdhRandomStr.Original = sltdhRandomStr.Hashed
-        sltdhRandomStr.Original = sltdhRandomStr.Salt
+        sltdhRandomStr.Original = Email
         strConfirmationHash = sltdhRandomStr.Hashed
+        sltdhRandomStr.Original = sltdhRandomStr.Salt
         If SaveConfirmationHash() = DatabaseResults.Updated Then
             envcCorreo.asunto = "Confirmación de reinicio de contraseña"
             envcCorreo.Cuerpo = "<p>Estimado usuario,<p>Hemos recibido su solicitud para reiniciar " & _
