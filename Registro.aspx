@@ -180,8 +180,8 @@
             <asp:TextBox ID="txtUsuario" runat="server" Width="200px" ToolTip="Escriba la clave de usuario que le gustaría utilizar; no utilizar espacios, acentos ó caracteres extraños; ej. eperez" MaxLength="15"></asp:TextBox>
             <asp:RequiredFieldValidator ID="rfvUsuario" runat="server" ControlToValidate="txtUsuario"
                 ErrorMessage="Indique el usuario que desea para el sistema" ToolTip="Indique el usuario que desea para el sistema" ForeColor="">x</asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="revUsuario" runat="server" ControlToValidate="txtUsuario"
-                ErrorMessage="Usuario tiene caracteres no válidos" ValidationExpression="^[a-zA-Z''-'ñÑÁáÉéÍíÓóÚúÜü_\s]{1,40}$" ToolTip="Usuario tiene caracteres no válidos" ForeColor="">x</asp:RegularExpressionValidator>
+            <%--<asp:RegularExpressionValidator ID="revUsuario" runat="server" ControlToValidate="txtUsuario"
+                ErrorMessage="Usuario tiene caracteres no válidos" ValidationExpression="^[a-zA-Z''-'ñÑÁáÉéÍíÓóÚúÜü_\s]{1,40}$" ToolTip="Usuario tiene caracteres no válidos" ForeColor="">x</asp:RegularExpressionValidator>--%>
             <asp:CustomValidator ID="cmvUsuario" runat="server" ControlToValidate="txtUsuario"
                 ErrorMessage="El nombre de usuario ya esta siendo utilizado. Seleccione uno nuevo" ToolTip="El nombre de usuario ya esta siendo utilizado. Seleccione uno nuevo" ForeColor="">x</asp:CustomValidator></td>
     </tr>

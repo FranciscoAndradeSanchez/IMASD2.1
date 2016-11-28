@@ -401,7 +401,7 @@ Public Class clsAuthentication
 
 
         Dim intResult As Int16 = -1
-       
+
 
         Dim taUsers As New dsUsuariosTableAdapters.CatUsuarioTableAdapter
 
