@@ -23,7 +23,7 @@
                                             ForeColor="" ToolTip="Texto a buscar tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator><asp:ImageButton
                                                 ID="ibtnBuscarProyectos" runat="server" ImageUrl="~/images/aplicacion/btnBuscar.gif" /></td>
                                     <td style="width: 16%">
-                                        <asp:LinkButton ID="lnkbMasOpciones" runat="server" OnClick="lnkbMasOpciones_Click">+ más opciones ...</asp:LinkButton></td>
+                                      
                                 </tr> 
                                    <tr>
                                 <td align="left" colspan="3" valign="middle">
@@ -291,32 +291,30 @@ PropertyName="SelectedValue" Type="Int32" />
                                                 <td>
                                                     <div>
                                                         <asp:ImageButton ID="ibtnDatosGeneralesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_dg_sel.gif" OnClick="ibtnDatosGeneralesEdt_Click" CssClass="pestana" />
-                                                        <asp:ImageButton ID="ibtnInfraestructuraEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_in_rep.gif" OnClick="ibtnInfraestructuraEdt_Click" CssClass="pestana" />
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <%--<tr>
                                                 <td>
                                                     <div>
-                                                        <asp:ImageButton ID="ibtnDetalleMontoEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_dm_rep.gif" OnClick="ibtnDetalleMontoEdt_Click" CssClass="pestana" />
                                                         <asp:ImageButton ID="ibtnDifusionDivulgaEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_dd_rep.gif" OnClick="ibtnDifusionDivulgaEdt_Click" CssClass="pestana" />
                                                         <asp:ImageButton ID="ibtnVisitasTecnicasEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_vt_rep.gif" OnClick="ibtnVisitasTecnicasEdt_Click" CssClass="pestana" />
                                                         <asp:ImageButton ID="ibtnSeguimientoEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_sg_rep.gif" OnClick="ibtnSeguimientoEdt_Click" CssClass="pestana" />
                                                         <asp:ImageButton ID="ibtnAdministrativoEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_ad_rep.gif" OnClick="ibtnAdministrativoEdt_Click" CssClass="pestana" />
                                                     </div>
                                                 </td>
-                                            </tr>
-                                            <tr>
+                                            </tr>--%>
+                                           <%-- <tr>
                                                 <td>
                                                     <div>
                                                         <asp:ImageButton ID="ibtnEtapasEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_et_rep.gif" OnClick="ibtnEtapasEdt_Click" CssClass="pestana" />
                                                         <%-- ELIMINADO ***<asp:ImageButton ID="ibtnProblematicasEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_pr_rep.gif" OnClick="ibtnProblematicasEdt_Click" CssClass="pestana"/>--%>
-                                                        <asp:ImageButton ID="ibtnParticipantesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_pa_rep.gif" OnClick="ibtnParticipantesEdt_Click" CssClass="pestana" />
+                                                    <%--    <asp:ImageButton ID="ibtnParticipantesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_pa_rep.gif" OnClick="ibtnParticipantesEdt_Click" CssClass="pestana" />
                                                         <asp:ImageButton ID="ibtnEspeciesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_es_rep.gif" OnClick="ibtnEspeciesEdt_Click" CssClass="pestana" />
                                                         <asp:ImageButton ID="ibtnEstadosEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_st_rep.gif" OnClick="ibtnEstadosEdt_Click" CssClass="pestana" />
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                             <tr>
                                                 <td>
                                                     <asp:MultiView ID="mviewProyectosEdt" runat="server" ActiveViewIndex="0">
@@ -489,18 +487,18 @@ PropertyName="SelectedValue" Type="Int32" />
                         <tr>
                             <td>Responsable Técnico</td>
                             <td>
-                                <asp:Label ID="lbResponsableTecnicoST" runat="server" Text='<%# Bind("Institucion")%>'></asp:Label></td>
+                                <asp:Label ID="lbInstitucion" runat="server" Text='<%# Bind("Institucion")%>'></asp:Label></td>
                         </tr>
                         <tr>
                             <td style="width: 30%">Año de la convocatoria
                             </td>
                             <td style="width: 70%">
-                                <asp:Label ID="lblAnioConvocatoriaST" runat="server" Text='<%# Bind("Titulo")%>'></asp:Label></td>
+                                <asp:Label ID="lbTitulo" runat="server" Text='<%# Bind("Titulo")%>'></asp:Label></td>
                         </tr>
                         <tr>
                             <td style="width: 30%">Institución</td>
                             <td style="width: 70%">
-                                <asp:Label ID="lblInstitucionST" runat="server" Text='<%# Bind("link")%>'></asp:Label></td>
+                                <asp:Label ID="lbllink" runat="server" Text='<%# Bind("link")%>'></asp:Label></td>
                         </tr>
                     </table>
                 </ItemTemplate>

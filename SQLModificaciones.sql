@@ -67,3 +67,32 @@ UPDATE Temas_Relacionados
 
 END
 GO
+
+-------------------------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE TemasRelacionados_CuentaTotal
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT COUNT(id_tema) FROM Temas_Relacionados
+END
+GO
+---------------------------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE TemasRelacionados_CuentaTotalFiltro
+(
+	@filtro as varchar(100)
+)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT COUNT(id_tema) FROM Temas_Relacionados
+	WHERE id_tema LIKE '%'+@filtro+'%' or  Nombre_Proyecto Like '%'+@filtro+'%' or Titulo  Like '%'+@filtro+'%' or Institucion  Like '%'+@filtro+'%'
+END
+GO
