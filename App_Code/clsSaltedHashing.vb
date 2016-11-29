@@ -37,23 +37,32 @@ Public Class clsSaltedHashing
         End Get
     End Property
 
+    'Protected Function Hashed_String() As String
+    '    If strSalt = String.Empty Then
+    '        Try
+    '            'Dim rngCryptoPrvdr As New RNGCryptoServiceProvider()
+    '            'rngCryptoPrvdr.GetBytes(bytSalt)
+    '            'strSalt = Convert.ToBase64String(bytSalt)
+    '            Dim result As String = String.Empty
+    '            Dim decryted As Byte() = Convert.FromBase64String(strOriginal)
+    '            'result = System.Text.Encoding.Unicode.GetString(decryted, 0, decryted.ToArray().Length);
+    '            result = System.Text.Encoding.Unicode.GetString(decryted)
+    '            Return result
+    '        Catch ex As Exception
+
+    '        End Try
+    '    End If
+    '    Hashed_String = Decrypt(strOriginal)
+    '    'Hashed_String = Decrypt(strOriginal, "SHA1")
+    'End Function
+
     Protected Function Hashed_String() As String
         If strSalt = String.Empty Then
-            Try
-                'Dim rngCryptoPrvdr As New RNGCryptoServiceProvider()
-                'rngCryptoPrvdr.GetBytes(bytSalt)
-                'strSalt = Convert.ToBase64String(bytSalt)
-                Dim result As String = String.Empty
-                Dim decryted As Byte() = Convert.FromBase64String(strOriginal)
-                'result = System.Text.Encoding.Unicode.GetString(decryted, 0, decryted.ToArray().Length);
-                result = System.Text.Encoding.Unicode.GetString(decryted)
-                Return result
-            Catch ex As Exception
-
-            End Try
+            Dim rngCryptoPrvdr As New RNGCryptoServiceProvider()
+            rngCryptoPrvdr.GetBytes(bytSalt)
+            strSalt = Convert.ToBase64String(bytSalt)
         End If
-        Hashed_String = Decrypt(strOriginal)
-        'Hashed_String = Decrypt(strOriginal, "SHA1")
+        Hashed_String = FormsAuthentication.HashPasswordForStoringInConfigFile(strSalt & strOriginal, "SHA1")
     End Function
 
     Public Function Decrypt(input As String) As String
