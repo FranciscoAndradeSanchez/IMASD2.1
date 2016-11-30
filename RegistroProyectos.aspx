@@ -6,7 +6,7 @@
     TagPrefix="ews" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphPrincipalInterna" Runat="Server">
-    <asp:ScriptManager ID="scrmInfoGeneral" runat="server"></asp:ScriptManager>
+<asp:ScriptManager ID="scrmInfoGeneral" runat="server"></asp:ScriptManager>
 <asp:MultiView ID="mviewProyectos" runat="server">
     <asp:View ID="viewLista" runat="server">
     <table width="100%" align="center">
@@ -15,27 +15,59 @@
                 <asp:Panel ID="pnlBusqueda" runat="server" Visible="True" Width="100%">
                     <table width="90%" align="center" class="tablaComun">
                             <tr>
-                                <td style="width: 30%"></td>
+                                <td > 
+                                    Tipo de proyecto
+                                </td>
+                                <td>
+                                     <asp:DropDownList ID="ddlTipoProyectoFill" runat="server" AutoPostBack="true" DataSourceID="odsTipoProyectoDDLFill"
+                                    DataTextField="DesTipoProy" DataValueField="CveTipoProy" Width="400px"></asp:DropDownList>
+                                     <asp:ObjectDataSource ID="odsTipoProyectoDDLFill" runat="server" OldValuesParameterFormatString="original_{0}"
+                                       SelectMethod="GetDataTipoProyectoBuscar" TypeName="dsAppTableAdapters.CatTipoProyectoTableAdapter">
+                                    </asp:ObjectDataSource>
+
+                                    <%-- <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="odsTipoApoyoBuscar" 
+                                     DataTextField="DesTipoApoyo" DataValueField="CveTipoApoyo" Width="300px"> </asp:DropDownList>
+                                     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}"
+                                     SelectMethod="GetDataTipoApoyoBuscar" TypeName="dsAppTableAdapters.spTipoApoyoDDLTableAdapter">
+                                     </asp:ObjectDataSource>--%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30%">
+
+                                </td>
                                 <td align="left" valign="middle" style="width: 54%">
-                                    <asp:TextBox ID="txtBusqueda" runat="server" Width="250px" MaxLength="100"></asp:TextBox><asp:RegularExpressionValidator
-                                        ID="revNombreProyectoEdt" runat="server" ControlToValidate="txtBusqueda" ErrorMessage="Texto a buscar tiene caracteres no permitidos"
-                                        ForeColor="" ToolTip="Texto a buscar tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator><asp:ImageButton
-                                        ID="ibtnBuscarProyectos" runat="server" ImageUrl="~/images/aplicacion/btnBuscar.gif" /></td>
+                                    <asp:TextBox ID="txtBusqueda" runat="server" Width="250px" MaxLength="100"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="revNombreProyectoEdt" runat="server" ControlToValidate="txtBusqueda" ErrorMessage="Texto a buscar tiene caracteres no permitidos"
+                                    ForeColor="" ToolTip="Texto a buscar tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator>
+                                    <asp:ImageButton ID="ibtnBuscarProyectos" runat="server" ImageUrl="~/images/aplicacion/btnBuscar.gif" /></td>
                                     <td style="width: 16%"><asp:LinkButton ID="lnkbMasOpciones" runat="server" OnClick="lnkbMasOpciones_Click">+ más opciones ...</asp:LinkButton></td>
                             </tr>
                             <tr>
+                                
+                                                        
+
                                 <td align="left" colspan="3" valign="middle">
+
                                     <asp:Panel ID="pnlMasOpcionesBusqueda" runat="server" Visible="False" Width="100%">
+
                                         <table cellpadding="3" cellspacing="0" class="tablaComun" width="100%">
                                             <tr>
                                                 <td align="left" style="width: 30%">
-                                                    <%--Clave CONACYT--%></td>
+                                                    <%--Clave CONACYT--%>                                                
+                                                </td>
                                                 <td align="left" style="width: 70%">
+                                                   
                                                     <asp:TextBox ID="txtCveCONACYTBuscar" runat="server" MaxLength="20" Visible="False" Enabled="False"></asp:TextBox>
                                                     <asp:RegularExpressionValidator ID="revCveCONACYTBuscar" runat="server" ControlToValidate="txtCveCONACYTBuscar"
                                                         ErrorMessage="Clave CONACYT tiene caracteres no permitidos" ForeColor="" ToolTip="Clave CONACYT tiene caracteres no permitidos"
-                                                        ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator></td>
+                                                        ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator>
+
+                                                </td>
+                                              
+                                             
                                             </tr>
+                                            
                                             <tr>
                                                 <td align="left" colspan="2">
                                                     <asp:UpdatePanel ID="updpTipoApoyoEstatus" runat="server">
@@ -45,8 +77,9 @@
                                                                 <tr>
                                                                     <td style="width: 30%">Tipo de apoyo</td>
                                                                     <td style="width: 70%">
-                                                                        <asp:DropDownList ID="ddlTipoApoyoBuscar" runat="server" AutoPostBack="True" DataSourceID="odsTipoApoyoBuscar" DataTextField="DesTipoApoyo" DataValueField="CveTipoApoyo" Width="300px">
-                                                                        </asp:DropDownList><asp:ObjectDataSource ID="odsTipoApoyoBuscar" runat="server" OldValuesParameterFormatString="original_{0}"
+                                                                        <asp:DropDownList ID="ddlTipoApoyoBuscar" runat="server" AutoPostBack="True" DataSourceID="odsTipoApoyoBuscar" 
+                                                                            DataTextField="DesTipoApoyo" DataValueField="CveTipoApoyo" Width="300px"> </asp:DropDownList>
+                                                                        <asp:ObjectDataSource ID="odsTipoApoyoBuscar" runat="server" OldValuesParameterFormatString="original_{0}"
                                                                             SelectMethod="GetDataTipoApoyoBuscar" TypeName="dsAppTableAdapters.spTipoApoyoDDLTableAdapter">
                                                                         </asp:ObjectDataSource>
                                                                     </td>
@@ -78,7 +111,7 @@
                                             </tr>
                                             <tr>
                                                 <td align="left" style="width: 30%">
-                                                    Región o Estado de seguimiento</td>
+                                                    Región de seguimiento</td>
                                                 <td align="left" style="width: 70%">
                                                     <asp:DropDownList ID="ddlRegionSegBuscar" runat="server" DataSourceID="odsRegionBuscar" DataTextField="DesRegion" DataValueField="CveRegion" Width="300px">
                                                     </asp:DropDownList><asp:ObjectDataSource ID="odsRegionBuscar" runat="server" OldValuesParameterFormatString="original_{0}"
@@ -195,6 +228,8 @@
                             PropertyName="SelectedValue" Type="Int32" />
                         <asp:ControlParameter ControlID="ddlInstitucionBuscar" Name="CveInstitucion" 
                             PropertyName="SelectedValue" Type="Int32" />
+                         <asp:ControlParameter ControlID="ddlTipoProyectoFill" Name="TipoProy" 
+                            PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>
                     
                 </asp:ObjectDataSource>
@@ -232,7 +267,7 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 25%">
-                                        Región o Estado de seguimiento:
+                                        Región seguimiento:
                                     </td>
                                     <td style="width: 75%">
                                         <asp:Label ID="lblRegionSeguimiento" runat="server" Text='<%# Eval("RegionSeguimiento") %>'></asp:Label></td>
@@ -516,7 +551,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td style="width: 30%">
-                                                            Gerencia regional de seguimiento o estado</td>
+                                                            Gerencia regional de seguimiento</td>
                                                         <td style="width: 70%">
                                                             <asp:DropDownList ID="ddlRegionSegEdt" runat="server" DataSourceID="odsRegionDDLEdt"
                                                                 DataTextField="DesRegion" DataValueField="CveRegion" SelectedValue='<%# Bind("CveRegion") %>'
@@ -4399,90 +4434,11 @@ Type="String" />
         <asp:ObjectDataSource ID="odsProyecto_Detalle" runat="server" 
             OldValuesParameterFormatString="original_{0}" 
             SelectMethod="GetDataByCveProyecto" 
-            TypeName="dsAppTableAdapters.ProyectoTableAdapter" DeleteMethod="Delete" InsertMethod="Insert" UpdateMethod="Update">
-            <DeleteParameters>
-                <asp:Parameter Name="Original_CveProyecto" Type="String" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="CveProyecto" Type="String" />
-                <asp:Parameter Name="CveTipoApoyo" Type="String" />
-                <asp:Parameter Name="FechaUltAct" Type="DateTime" />
-                <asp:Parameter Name="FechaCaptura" Type="DateTime" />
-                <asp:Parameter Name="NombreProyecto" Type="String" />
-                <asp:Parameter Name="AnioConvocatoria" Type="Int32" />
-                <asp:Parameter Name="CveInstitucion" Type="Int32" />
-                <asp:Parameter Name="CveTipoProy" Type="Int32" />
-                <asp:Parameter Name="Resumen" Type="String" />
-                <asp:Parameter Name="CveRegion" Type="String" />
-                <asp:Parameter Name="CveEscala" Type="Int32" />
-                <asp:Parameter Name="CveVegetacion" Type="Int32" />
-                <asp:Parameter Name="Metodologia" Type="String" />
-                <asp:Parameter Name="CveEstatus" Type="Int32" />
-                <asp:Parameter Name="CveObjeto" Type="Int32" />
-                <asp:Parameter Name="Demanda" Type="String" />
-                <asp:Parameter Name="FechaConvAcue" Type="DateTime" />
-                <asp:Parameter Name="CveEcosistema" Type="Int32" />
-                <asp:Parameter Name="ResultadosEsp" Type="String" />
-                <asp:Parameter Name="Demandante" Type="String" />
-                <asp:Parameter Name="IdentProblema" Type="String" />
-                <asp:Parameter Name="CveAreaTematica" Type="Int32" />
-                <asp:Parameter Name="CoberturaOperativa" Type="String" />
-                <asp:Parameter Name="ImpactosEsperados" Type="String" />
-                <asp:Parameter Name="CveSectorUsuario" Type="Int32" />
-                <asp:Parameter Name="Materiales" Type="String" />
-                <asp:Parameter Name="Usuario" Type="String" />
-                <asp:Parameter Name="RequisitosTT" Type="String" />
-                <asp:Parameter Name="ActividadesTT" Type="String" />
-                <asp:Parameter Name="ObjetivoGeneral" Type="String" />
-                <asp:Parameter Name="ObjetivosEspecificos" Type="String" />
-                <asp:Parameter Name="CveResponsableTecnico" Type="Int32" />
-                <asp:Parameter Name="CostoTotalProyecto" Type="Decimal" />
-                <asp:Parameter Name="AportacionApoyoInstitucional" Type="Decimal" />
-                <asp:Parameter Name="AportacionInstitucionEjecutora" Type="Decimal" />
-                <asp:Parameter Name="AportacionesOtras" Type="Decimal" />
-            </InsertParameters>
+            TypeName="dsAppTableAdapters.ProyectoTableAdapter">
             <SelectParameters>
                 <asp:ControlParameter ControlID="hdCveProyecto_Detalle" Name="CveProyecto" 
                     PropertyName="Value" Type="String" />
             </SelectParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="CveTipoApoyo" Type="String" />
-                <asp:Parameter Name="FechaUltAct" Type="DateTime" />
-                <asp:Parameter Name="FechaCaptura" Type="DateTime" />
-                <asp:Parameter Name="NombreProyecto" Type="String" />
-                <asp:Parameter Name="AnioConvocatoria" Type="Int32" />
-                <asp:Parameter Name="CveInstitucion" Type="Int32" />
-                <asp:Parameter Name="CveTipoProy" Type="Int32" />
-                <asp:Parameter Name="Resumen" Type="String" />
-                <asp:Parameter Name="CveRegion" Type="String" />
-                <asp:Parameter Name="CveEscala" Type="Int32" />
-                <asp:Parameter Name="CveVegetacion" Type="Int32" />
-                <asp:Parameter Name="Metodologia" Type="String" />
-                <asp:Parameter Name="CveEstatus" Type="Int32" />
-                <asp:Parameter Name="CveObjeto" Type="Int32" />
-                <asp:Parameter Name="Demanda" Type="String" />
-                <asp:Parameter Name="FechaConvAcue" Type="DateTime" />
-                <asp:Parameter Name="CveEcosistema" Type="Int32" />
-                <asp:Parameter Name="ResultadosEsp" Type="String" />
-                <asp:Parameter Name="Demandante" Type="String" />
-                <asp:Parameter Name="IdentProblema" Type="String" />
-                <asp:Parameter Name="CveAreaTematica" Type="Int32" />
-                <asp:Parameter Name="CoberturaOperativa" Type="String" />
-                <asp:Parameter Name="ImpactosEsperados" Type="String" />
-                <asp:Parameter Name="CveSectorUsuario" Type="Int32" />
-                <asp:Parameter Name="Materiales" Type="String" />
-                <asp:Parameter Name="Usuario" Type="String" />
-                <asp:Parameter Name="RequisitosTT" Type="String" />
-                <asp:Parameter Name="ActividadesTT" Type="String" />
-                <asp:Parameter Name="ObjetivoGeneral" Type="String" />
-                <asp:Parameter Name="ObjetivosEspecificos" Type="String" />
-                <asp:Parameter Name="CveResponsableTecnico" Type="Int32" />
-                <asp:Parameter Name="CostoTotalProyecto" Type="Decimal" />
-                <asp:Parameter Name="AportacionApoyoInstitucional" Type="Decimal" />
-                <asp:Parameter Name="AportacionInstitucionEjecutora" Type="Decimal" />
-                <asp:Parameter Name="AportacionesOtras" Type="Decimal" />
-                <asp:Parameter Name="Original_CveProyecto" Type="String" />
-            </UpdateParameters>
         </asp:ObjectDataSource>
         <asp:FormView ID="frmvProyecto_Detalle" runat="server" 
             DataSourceID="odsProyecto_Detalle">
@@ -5146,14 +5102,14 @@ Type="String" />
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    Gerencia regional de seguimiento o estado</td>
+                                    Gerencia regional de seguimiento</td>
                                 <td style="width: 70%">
                                     <asp:DropDownList ID="ddlRegionSegAdd" runat="server" DataSourceID="odsRegionDDLAdd"
                                         DataTextField="DesRegion" DataValueField="CveRegion"
                                         Width="400px">
                                     </asp:DropDownList><asp:RegularExpressionValidator ID="revRegionSegAdd" runat="server"
-                                        ControlToValidate="ddlRegionSegAdd" ErrorMessage="Indique la gerencia regional de sequimiento o estado"
-                                        ForeColor="" ToolTip="Indique la gerencia regional de sequimiento o estado" ValidationExpression="<%#ValExpRegion()%>">x</asp:RegularExpressionValidator>
+                                        ControlToValidate="ddlRegionSegAdd" ErrorMessage="Indique la gerencia regional de sequimiento"
+                                        ForeColor="" ToolTip="Indique la gerencia regional de sequimiento" ValidationExpression="<%#ValExpRegion()%>">x</asp:RegularExpressionValidator>
                                     <asp:ObjectDataSource ID="odsRegionDDLAdd" runat="server" OldValuesParameterFormatString="original_{0}"
                                         SelectMethod="GetData" TypeName="dsAppTableAdapters.spRegionDDLTableAdapter"></asp:ObjectDataSource>
                                 </td>

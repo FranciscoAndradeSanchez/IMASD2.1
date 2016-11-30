@@ -68,11 +68,12 @@ Partial Class RegistroProyectos2
             Dim Estatus As Integer
             Dim Anio As Integer
             Dim CveInstitucion As Integer
+            Dim TipoProy As Integer
             If (ddlEstatusBuscar.SelectedValue <> String.Empty) Then Estatus = CInt(ddlEstatusBuscar.SelectedValue) Else Estatus = 0
             If (ddlAnioProyectoBuscar.SelectedValue <> String.Empty) Then Anio = CInt(ddlAnioProyectoBuscar.SelectedValue) Else Anio = 0
             If (ddlInstitucionBuscar.SelectedValue <> String.Empty) Then CveInstitucion = CInt(ddlInstitucionBuscar.SelectedValue) Else CveInstitucion = 0
-
-            Return taProyectos.CuentaTotalProyectosFiltrado(txtBusqueda.Text, ddlTipoApoyoBuscar.SelectedValue, Estatus, ddlRegionSegBuscar.SelectedValue, Anio, CveInstitucion)
+            If (ddlTipoProyectoFill.SelectedValue <> String.Empty) Then TipoProy = CInt(ddlTipoProyectoFill.SelectedValue) Else TipoProy = 0
+            Return taProyectos.CuentaTotalProyectosFiltrado(txtBusqueda.Text, ddlTipoApoyoBuscar.SelectedValue, Estatus, ddlRegionSegBuscar.SelectedValue, Anio, CveInstitucion, TipoProy)
         End Get
     End Property
 
