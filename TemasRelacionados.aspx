@@ -142,67 +142,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <%--<asp:ObjectDataSource ID="odsProyecto" runat="server" DeleteMethod="Delete" 
-OldValuesParameterFormatString="original_{0}" 
-SelectMethod="GetProyectoFiltrado" 
-TypeName="dsAppTableAdapters.ProyectoTableAdapter" UpdateMethod="Update">
-<DeleteParameters>
-<asp:Parameter Name="Original_CveProyecto" Type="String" />
-</DeleteParameters>
-<UpdateParameters>
-<asp:Parameter Name="CveTipoApoyo" Type="String" />
-<asp:Parameter Name="FechaUltAct" Type="DateTime" />
-<asp:Parameter Name="FechaCaptura" Type="DateTime" />
-<asp:Parameter Name="NombreProyecto" Type="String" />
-<asp:Parameter Name="AnioConvocatoria" Type="Int32" />
-<asp:Parameter Name="CveInstitucion" Type="Int32" />
-<asp:Parameter Name="CveTipoProy" Type="Int32" />
-<asp:Parameter Name="Resumen" Type="String" />
-<asp:Parameter Name="CveRegion" Type="String" />
-<asp:Parameter Name="CveEscala" Type="Int32" />
-<asp:Parameter Name="CveVegetacion" Type="Int32" />
-<asp:Parameter Name="Metodologia" Type="String" />
-<asp:Parameter Name="CveEstatus" Type="Int32" />
-<asp:Parameter Name="CveObjeto" Type="Int32" DefaultValue="1" />
-<asp:Parameter Name="Demanda" Type="String" />
-<asp:Parameter Name="FechaConvAcue" Type="DateTime" />
-<asp:Parameter Name="CveEcosistema" Type="Int32" />
-<asp:Parameter Name="ResultadosEsp" Type="String" />
-<asp:Parameter Name="Demandante" Type="String" />
-<asp:Parameter Name="IdentProblema" Type="String" />
-<asp:Parameter Name="CveAreaTematica" Type="Int32" />
-<asp:Parameter Name="CoberturaOperativa" Type="String" />
-<asp:Parameter Name="ImpactosEsperados" Type="String" />
-<asp:Parameter Name="CveSectorUsuario" Type="Int32" />
-<asp:Parameter Name="Materiales" Type="String" />
-<asp:Parameter Name="Usuario" Type="String" />
-<asp:Parameter Name="RequisitosTT" Type="String" />
-<asp:Parameter Name="ActividadesTT" Type="String" />
-<asp:Parameter Name="ObjetivoGeneral" Type="String" />
-<asp:Parameter Name="ObjetivosEspecificos" Type="String" />
-<asp:Parameter Name="CveResponsableTecnico" Type="Int32" />
-<asp:Parameter Name="CostoTotalProyecto" Type="Decimal" />
-<asp:Parameter Name="AportacionApoyoInstitucional" Type="Decimal" />
-<asp:Parameter Name="AportacionInstitucionEjecutora" Type="Decimal" />
-<asp:Parameter Name="AportacionesOtras" Type="Decimal" />
-<asp:Parameter Name="Original_CveProyecto" Type="String" />
-</UpdateParameters>
-<SelectParameters>
-<asp:ControlParameter ControlID="txtBusqueda" DefaultValue="" Name="Busqueda" 
-PropertyName="Text" Type="String" />
-<asp:ControlParameter ControlID="ddlTipoApoyoBuscar" Name="CveTipoApoyo" 
-PropertyName="SelectedValue" Type="String" />
-<asp:ControlParameter ControlID="ddlEstatusBuscar" Name="CveEstatus" 
-PropertyName="SelectedValue" Type="Int32" />
-<asp:ControlParameter ControlID="ddlRegionSegBuscar" Name="CveRegion" 
-PropertyName="SelectedValue" Type="String" />
-<asp:ControlParameter ControlID="ddlAnioProyectoBuscar" Name="AnioConvocatoria" 
-PropertyName="SelectedValue" Type="Int32" />
-<asp:ControlParameter ControlID="ddlInstitucionBuscar" Name="CveInstitucion" 
-PropertyName="SelectedValue" Type="Int32" />
-</SelectParameters>
-                    
-</asp:ObjectDataSource>--%>
+                      
                         <asp:ObjectDataSource ID="odsTemas" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetTemasRelacionados_Detalle" TypeName="dsAppTableAdapters.Temas_RelacionadosTableAdapter" DeleteMethod="Delete" InsertMethod="Insert" UpdateMethod="Update">
                             <DeleteParameters>
                                 <asp:Parameter Name="Original_id_tema" Type="Int32" />
@@ -214,7 +154,7 @@ PropertyName="SelectedValue" Type="Int32" />
                                 <asp:Parameter Name="link" Type="String" />
                             </InsertParameters>
                             <SelectParameters>
-                                <asp:ControlParameter ControlID="txtBusqueda" Name="filtro" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="txtBusqueda" Name="filtro" PropertyName="Text" Type="String" DefaultValue=" " />
                             </SelectParameters>
                             <UpdateParameters>
                                 <asp:Parameter Name="Nombre_Proyecto" Type="String" />
@@ -235,181 +175,11 @@ PropertyName="SelectedValue" Type="Int32" />
                             <PagerSettings Mode="NumericFirstLast" Position="TopAndBottom" />
                             <RowStyle CssClass="tablaItemTemplate" />
                             <Columns>
-                                <asp:TemplateField SortExpression="CveProyecto" ShowHeader="False" HeaderStyle-BorderWidth="0px" HeaderStyle-BorderStyle="None">
-                                    <ItemTemplate>
-                                        <table width="90%" align="center" border="0" cellpadding="3" cellspacing="0">
-                                            <tr>
-                                                <th style="width: 25%">Clave CONACYT</th>
-                                                <th style="width: 75%">
-                                                    <asp:LinkButton ID="lnkbCveProyecto" runat="server" CommandName="Select" Text='<%# Eval("id_tema")%>'></asp:LinkButton></th>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 25%">Nombre del proyecto:
-                                                </td>
-                                                <td style="width: 75%">
-                                                    <asp:Label ID="lblNombreProyecto" runat="server" Text='<%# Eval("Nombre_Proyecto")%>'></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 25%">Año de la convocatoria:
-                                                </td>
-                                                <td style="width: 75%">
-                                                    <asp:Label ID="lblinstitucion" runat="server" Text='<%# Eval("Institucion")%>'></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 25%">Región o Estado de seguimiento:
-                                                </td>
-                                                <td style="width: 75%">
-                                                    <asp:Label ID="lbltitulo" runat="server" Text='<%# Eval("Titulo")%>'></asp:Label></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 25%">Institución:
-                                                </td>
-                                                <td style="width: 75%">
-                                                    <asp:Label ID="lbllink" runat="server" Text='<%# Eval("link")%>' ></asp:Label></td>
-                                            </tr>
-                                            <tr class="xxxs" style="display: none;">
-                                                <td style="width: 25%">
-                                                    <asp:TextBox ID="txtVal" runat="server" MaxLength="1" ReadOnly="True" Width="1px"></asp:TextBox>
-                                                </td>
-                                                <td style="width: 75%">&nbsp;<asp:CustomValidator ID="cuvEliminar" runat="server" ControlToValidate="txtVal" ForeColor=""></asp:CustomValidator></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 25%">&nbsp;
-                                                </td>
-                                                <td style="width: 75%">
-                                                    <asp:ImageButton ID="ibtnEditarIT" runat="server" ImageUrl="~/images/aplicacion/btnEditar.gif" CommandArgument='<%# Eval("id_tema")%>' CommandName="Edit" />
-                                                    <asp:ImageButton ID="ibtnEliminarIT" runat="server" ImageUrl="~/images/aplicacion/btnEliminar.gif" CommandName="Delete" CommandArgument='<%# Eval("id_tema")%>' /></td>
-                                            </tr>
-                                        </table>
-                                    </ItemTemplate>
-                                    <EditItemTemplate>
-                                        <table align="center" border="0" cellpadding="0" cellspacing="0" class="tablaComun" width="100%">
-                                            <tr>
-                                                <td style="border-top-style: double; border-top-color: white; height: 30px;">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div>
-                                                        <asp:ImageButton ID="ibtnDatosGeneralesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_dg_sel.gif" OnClick="ibtnDatosGeneralesEdt_Click" CssClass="pestana" />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <%--<tr>
-                                                <td>
-                                                    <div>
-                                                        <asp:ImageButton ID="ibtnDifusionDivulgaEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_dd_rep.gif" OnClick="ibtnDifusionDivulgaEdt_Click" CssClass="pestana" />
-                                                        <asp:ImageButton ID="ibtnVisitasTecnicasEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_vt_rep.gif" OnClick="ibtnVisitasTecnicasEdt_Click" CssClass="pestana" />
-                                                        <asp:ImageButton ID="ibtnSeguimientoEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_sg_rep.gif" OnClick="ibtnSeguimientoEdt_Click" CssClass="pestana" />
-                                                        <asp:ImageButton ID="ibtnAdministrativoEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_ad_rep.gif" OnClick="ibtnAdministrativoEdt_Click" CssClass="pestana" />
-                                                    </div>
-                                                </td>
-                                            </tr>--%>
-                                           <%-- <tr>
-                                                <td>
-                                                    <div>
-                                                        <asp:ImageButton ID="ibtnEtapasEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_et_rep.gif" OnClick="ibtnEtapasEdt_Click" CssClass="pestana" />
-                                                        <%-- ELIMINADO ***<asp:ImageButton ID="ibtnProblematicasEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_pr_rep.gif" OnClick="ibtnProblematicasEdt_Click" CssClass="pestana"/>--%>
-                                                    <%--    <asp:ImageButton ID="ibtnParticipantesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_pa_rep.gif" OnClick="ibtnParticipantesEdt_Click" CssClass="pestana" />
-                                                        <asp:ImageButton ID="ibtnEspeciesEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_es_rep.gif" OnClick="ibtnEspeciesEdt_Click" CssClass="pestana" />
-                                                        <asp:ImageButton ID="ibtnEstadosEdt" runat="server" ImageUrl="~/images/aplicacion/pestana_st_rep.gif" OnClick="ibtnEstadosEdt_Click" CssClass="pestana" />
-                                                    </div>
-                                                </td>
-                                            </tr>--%>
-                                            <tr>
-                                                <td>
-                                                    <asp:MultiView ID="mviewProyectosEdt" runat="server" ActiveViewIndex="0">
-                                                        <asp:View ID="viewDatosGeneralesEdt" runat="server">
-                                                            <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%">
-                                                                <tr>
-                                                                    <td colspan="2">&nbsp;&nbsp;
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th class="thtablaComun" colspan="2">Datos Generales del proyecto</th>                       
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 30%; height: 15px">&nbsp;
-                                                                    </td>
-                                                                    <td style="width: 70%; height: 15px">&nbsp;
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 30%">Clave Tema Relacionado</td>
-                                                                    <td style="width: 70%">
-                                                                        <asp:Label ID="lblCvetema" runat="server" Text='<%# Eval("id_tema")%>'></asp:Label>
-
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 30%">Nombre del proyecto</td>
-                                                                    <td style="width: 70%">
-                                                                        <asp:TextBox ID="txtNombreEdt" runat="server" MaxLength="300" Rows="4" Text='<%# Bind("Nombre_Proyecto")%>'
-                                                                            TextMode="MultiLine" Width="400px"></asp:TextBox><asp:RequiredFieldValidator ID="rfvNombreProyectoEdt"
-                                                                                runat="server" ControlToValidate="txtNombreEdt" ErrorMessage="Nombre del proyecto es un valor requerido"
-                                                                                ForeColor="" ToolTip="Nombre del proyecto es un valor requerido">x</asp:RequiredFieldValidator><asp:RegularExpressionValidator
-                                                                                    ID="revNombreProyectoEdt" runat="server" ControlToValidate="txtNombreEdt" ErrorMessage="Nombre del proyecto tiene caracteres no permitidos"
-                                                                                    ForeColor="" ToolTip="Nombre del proyecto tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator><asp:CustomValidator
-                                                                                        ID="cuvExcepcionesEdt" runat="server" ErrorMessage="Error al intentar guardar los datos"
-                                                                                        ForeColor="" ToolTip="Error al intentar guardar los datos" ControlToValidate="txtNombreEdt">x</asp:CustomValidator></td>
-                                                            </tr>
-                                                             <tr>
-                                                                    <td style="width: 30%">Institución</td>
-                                                                    <td style="width: 70%">
-                                                                        <asp:DropDownList ID="ddlInstitucionEdt" runat="server" DataSourceID="odsInstitucionDDLEdt"
-                                                                            DataTextField="DesInstitucion" DataValueField="CveInstitucion" SelectedValue='<%# Bind("Institucion")%>' Width="400px">
-                                                                        </asp:DropDownList><asp:RangeValidator ID="ravInstitucionEdt" runat="server" ControlToValidate="ddlInstitucionEdt"
-                                                                            ErrorMessage="Indique la institución" ForeColor="" MaximumValue="1000" MinimumValue="1"
-                                                                            ToolTip="Indique la institución" Type="Integer">x</asp:RangeValidator><asp:ObjectDataSource
-                                                                                ID="odsInstitucionDDLEdt" runat="server" OldValuesParameterFormatString="original_{0}"
-                                                                                SelectMethod="GetData" TypeName="dsAppTableAdapters.spInstitucionDDLTableAdapter"></asp:ObjectDataSource>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 30%">Resumen</td>
-                                                                    <td style="width: 70%">
-                                                                        <asp:TextBox ID="txtTituloTema" runat="server" MaxLength="1073741823" Rows="4" Text='<%# Bind("Titulo")%>'
-                                                                            TextMode="MultiLine" Width="400px"></asp:TextBox><asp:RequiredFieldValidator ID="rfvResumenEdt"
-                                                                                runat="server" ControlToValidate="txtTituloTema" ErrorMessage="El titulo del proyecto es un valor requerido"
-                                                                                ForeColor="" ToolTip="El titulo del proyecto es un valor requerido">x</asp:RequiredFieldValidator>
-                                           <asp:RegularExpressionValidator ID="revResumenEdt" runat="server" ControlToValidate="txtResumenEdt" ErrorMessage="Titulo del proyecto tiene caracteres no permitidos"
-                                                                                    ForeColor="" ToolTip="Titulo del proyecto tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="width: 30%">Objetivo general</td>
-                                                                    <td style="width: 70%">
-                                                                        <asp:TextBox ID="txtObjetivoGralEdt" runat="server" MaxLength="1000" Rows="4" Text='<%# Bind("link")%>'
-                                                                            TextMode="MultiLine" Width="400px"></asp:TextBox>
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td colspan="2"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="1"></td>
-                                                                    <td>
-                                                                        <asp:ValidationSummary ID="vsValidacionEdt" runat="server" DisplayMode="List" ForeColor=""
-                                                                            HeaderText="Se encontraron los siguientes errores:" />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="1"></td>
-                                                                    <td>
-                                                                        <asp:ImageButton ID="ibtnActualizarEdt" runat="server" CommandName="Update" ImageUrl="~/images/aplicacion/btnGuardar.gif" />
-                                                                        <asp:ImageButton ID="ibtnCancelarEdt" runat="server" CommandName="Cancel" ImageUrl="~/images/aplicacion/btnCancelar.gif" CausesValidation="False" /></td>
-                                                                </tr>
-                                                            </table>
-                                                        </asp:View>
-                                                    </asp:MultiView></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="border-top-style: double; border-top-color: white; height: 30px; width: 720px;">&nbsp;
-            		                    
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </EditItemTemplate>
-                                </asp:TemplateField>
+                                <asp:BoundField DataField="id_tema" HeaderText="id_tema" InsertVisible="False" ReadOnly="True" SortExpression="id_tema" />
+                                <asp:BoundField DataField="Nombre_Proyecto" HeaderText="Nombre_Proyecto" SortExpression="Nombre_Proyecto" />
+                                <asp:BoundField DataField="Institucion" HeaderText="Institucion" SortExpression="Institucion" />
+                                <asp:BoundField DataField="Titulo" HeaderText="Titulo" SortExpression="Titulo" />
+                                <asp:BoundField DataField="link" HeaderText="link" SortExpression="link" />
                             </Columns>
                         </asp:GridView>
                     </td>
@@ -455,7 +225,7 @@ PropertyName="SelectedValue" Type="Int32" />
                     <asp:Parameter Name="link" Type="String" />
                 </InsertParameters>
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="txtBusqueda" Name="filtro" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="txtBusqueda" Name="filtro" PropertyName="Text" Type="String" DefaultValue=" " />
                 </SelectParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="Nombre_Proyecto" Type="String" />
@@ -468,39 +238,62 @@ PropertyName="SelectedValue" Type="Int32" />
 
 
             <asp:FormView ID="frmvProyecto_Detalle" runat="server"
-                DataSourceID="odsTemasRelacionados">
+                DataSourceID="odsTemasRelacionados" DataKeyNames="id_tema">
+                <EditItemTemplate>
+                    id_tema:
+                    <asp:Label ID="id_temaLabel1" runat="server" Text='<%# Eval("id_tema") %>' />
+                    <br />
+                    Nombre_Proyecto:
+                    <asp:TextBox ID="Nombre_ProyectoTextBox" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
+                    <br />
+                    Institucion:
+                    <asp:TextBox ID="InstitucionTextBox" runat="server" Text='<%# Bind("Institucion") %>' />
+                    <br />
+                    Titulo:
+                    <asp:TextBox ID="TituloTextBox" runat="server" Text='<%# Bind("Titulo") %>' />
+                    <br />
+                    link:
+                    <asp:TextBox ID="linkTextBox" runat="server" Text='<%# Bind("link") %>' />
+                    <br />
+                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar" />
+                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    Nombre_Proyecto:
+                    <asp:TextBox ID="Nombre_ProyectoTextBox" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
+                    <br />
+                    Institucion:
+                    <asp:TextBox ID="InstitucionTextBox" runat="server" Text='<%# Bind("Institucion") %>' />
+                    <br />
+                    Titulo:
+                    <asp:TextBox ID="TituloTextBox" runat="server" Text='<%# Bind("Titulo") %>' />
+                    <br />
+                    link:
+                    <asp:TextBox ID="linkTextBox" runat="server" Text='<%# Bind("link") %>' />
+                    <br />
+                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
+                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
+                </InsertItemTemplate>
                 <ItemTemplate>
-                    <table cellpadding="3" cellspacing="0" class="tablaComun" width="90%" align="center" border="0">
-                        <tr>
-                            <td colspan="2" class="thtablaComun">Datos Generales</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30%">Clave CONACYT&nbsp;</td>
-                            <td style="width: 70%">
-                                <asp:Label ID="lblCveProyectoST" runat="server" Text='<%# Eval("id_tema")%>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30%">Nombre del proyecto</td>
-                            <td style="width: 70%">
-                                <asp:Label ID="lblNombreProyectoST" runat="server" Text='<%# Bind("Nombre_Proyecto")%>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td>Responsable Técnico</td>
-                            <td>
-                                <asp:Label ID="lbInstitucion" runat="server" Text='<%# Bind("Institucion")%>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30%">Año de la convocatoria
-                            </td>
-                            <td style="width: 70%">
-                                <asp:Label ID="lbTitulo" runat="server" Text='<%# Bind("Titulo")%>'></asp:Label></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 30%">Institución</td>
-                            <td style="width: 70%">
-                                <asp:Label ID="lbllink" runat="server" Text='<%# Bind("link")%>'></asp:Label></td>
-                        </tr>
-                    </table>
+                    id_tema:
+                    <asp:Label ID="id_temaLabel" runat="server" Text='<%# Eval("id_tema") %>' />
+                    <br />
+                    Nombre_Proyecto:
+                    <asp:Label ID="Nombre_ProyectoLabel" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
+                    <br />
+                    Institucion:
+                    <asp:Label ID="InstitucionLabel" runat="server" Text='<%# Bind("Institucion") %>' />
+                    <br />
+                    Titulo:
+                    <asp:Label ID="TituloLabel" runat="server" Text='<%# Bind("Titulo") %>' />
+                    <br />
+                    link:
+                    <asp:Label ID="linkLabel" runat="server" Text='<%# Bind("link") %>' />
+                    <br />
+                     <asp:TextBox ID="txtVal" runat="server" MaxLength="1" ReadOnly="True" Width="1px"></asp:TextBox>
+                     <asp:ImageButton runat="server" ImageUrl="~/images/aplicacion/btnEditar.gif" CommandArgument='<%# Eval("id_tema")%>' CommandName="Edit" />
+                     <asp:ImageButton runat="server" ImageUrl="~/images/aplicacion/btnEliminar.gif" CommandName="Delete" CommandArgument='<%# Eval("id_tema") %>' />
+               
                 </ItemTemplate>
             </asp:FormView>
             <br />

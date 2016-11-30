@@ -213,16 +213,29 @@ Partial Class TemasRelacionados
 
     Private Sub EnableNavigation()
 
-        'PageIndex = grdvProyectos.PageIndex + 1
-        'lblTotalProyectosUP.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
-        'lblTotalProyectosDW.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
-        'lblPaginaActualUP.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ MaximumRows) + 1)
-        'lblPaginaActualDW.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ grdvProyectos.PageSize) + 1)
+        PageIndex = grdvProyectos.PageIndex + 1
+        lblTotalProyectosUP.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
+        lblTotalProyectosDW.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
+        lblPaginaActualUP.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ MaximumRows) + 1)
+        lblPaginaActualDW.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ grdvProyectos.PageSize) + 1)
 
 
     End Sub
 
+    Private ReadOnly Property TotalRowCount() As Integer
+        Get
+            Dim tatemas As New dsAppTableAdapters.Temas_RelacionadosTableAdapter
+            Dim Estatus As Integer
+            Dim Anio As Integer
+            Dim filtro As String
+            Dim CveInstitucion As Integer
+            If (txtBusqueda.Text <> String.Empty) Then filtro = txtBusqueda.Text Else filtro = ""
+            'If (ddlAnioProyectoBuscar.SelectedValue <> String.Empty) Then Anio = CInt(ddlAnioProyectoBuscar.SelectedValue) Else Anio = 0
+            'If (ddlInstitucionBuscar.SelectedValue <> String.Empty) Then CveInstitucion = CInt(ddlInstitucionBuscar.SelectedValue) Else CveInstitucion = 0
 
+            Return tatemas.spTemasRelacionados_CuentaTotalFiltro(filtro)
+        End Get
+    End Property
 
     Private Property StartRowIndex() As Integer
         Get
@@ -408,40 +421,39 @@ Partial Class TemasRelacionados
                 CType(CType(e.Row.DataItem, DataRowView).Row, dsApp.Temas_RelacionadosRow)
             'Dim product As dsApp.ProyectoRow = _
             '    CType(CType(e.Row.DataItem, DataRowView).Row, dsApp.ProyectoRow)
-            Dim db As ImageButton = _
-                CType(DataField.FindControl("ibtnEliminarIT"), ImageButton)
-            Dim ibtnEditar As ImageButton = _
-                CType(DataField.FindControl("ibtnEditarIT"), ImageButton)
-            Dim txtValidar As TextBox = CType(DataField.FindControl("txtVal"), TextBox)
 
-            If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
-                Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
-                    Case clsAuthentication.AuthorizationLevelList.Administering
-                        ibtnEditar.Visible = True
-                        db.Visible = True
-                        txtValidar.Visible = True
-                    Case clsAuthentication.AuthorizationLevelList.Financial
-                        ibtnEditar.Visible = True
-                        db.Visible = False
-                        txtValidar.Visible = False
-                    Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
-                        ibtnEditar.Visible = True
-                        db.Visible = False
-                        txtValidar.Visible = False
-                    Case clsAuthentication.AuthorizationLevelList.Consulting
-                        ibtnEditar.Visible = False
-                        db.Visible = False
-                        txtValidar.Visible = False
-                    Case Else
-                        ibtnEditar.Visible = False
-                        db.Visible = False
-                        txtValidar.Visible = False
-                End Select
-            End If
+            'Dim db As ImageButton = CType(DataField.FindControl("ibtnEliminarIT"), ImageButton)
+            'Dim ibtnEditar As ImageButton = CType(DataField.FindControl("ibtnEditarIT"), ImageButton)
+            'Dim txtValidar As TextBox = CType(DataField.FindControl("txtVal"), TextBox)
 
-            db.OnClientClick = String.Format( _
-                "return confirm('¿Desea eliminar el proyecto {0}?');", _
-                producto.id_tema)
+            'If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+            '    Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
+            '        Case clsAuthentication.AuthorizationLevelList.Administering
+            '            ibtnEditar.Visible = True
+            '            db.Visible = True
+            '            txtValidar.Visible = True
+            '        Case clsAuthentication.AuthorizationLevelList.Financial
+            '            ibtnEditar.Visible = True
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '        Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
+            '            ibtnEditar.Visible = True
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '        Case clsAuthentication.AuthorizationLevelList.Consulting
+            '            ibtnEditar.Visible = False
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '        Case Else
+            '            ibtnEditar.Visible = False
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '    End Select
+            'End If
+
+            'db.OnClientClick = String.Format( _
+            '    "return confirm('¿Desea eliminar el proyecto {0}?');", _
+            '    producto.id_tema)
             'product.CveProyecto.Replace("'", "\'"))
         End If
         'FILA QUE SE ESTA EDITANDO
