@@ -1,5 +1,656 @@
-﻿
+﻿Imports System.Data
+
 Partial Class TemasRelacionados
     Inherits System.Web.UI.Page
+
+
+
+#Region "Definiciones"
+    Private Const PathProducts As String = "~/Productos/"
+
+    Private Property CurrentCveProyecto() As String
+        Get
+            Dim o As Object = ViewState("CurrentCveProyecto")
+            If o Is Nothing Then
+                Return "-1"
+            Else
+                Return CType(o, String)
+            End If
+        End Get
+        Set(ByVal value As String)
+            ViewState("CurrentCveProyecto") = value
+        End Set
+    End Property
+
+    Private Property CurrentCveEtapa() As Integer
+        Get
+            Dim o As Object = ViewState("CurrentCveEtapa")
+            If o Is Nothing Then
+                Return -1
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("CurrentCveEtapa") = value
+        End Set
+    End Property
+
+    Private Property CurrentCveAsunto() As Integer
+        Get
+            Dim o As Object = ViewState("CurrentCveAsunto")
+            If o Is Nothing Then
+                Return -1
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("CurrentCveAsunto") = value
+        End Set
+    End Property
+
+    Private Property CurrentCveVisita() As Integer
+        Get
+            Dim o As Object = ViewState("CurrentCveVisita")
+            If o Is Nothing Then
+                Return -1
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("CurrentCveVisita") = value
+        End Set
+    End Property
+
+
+    Public ReadOnly Property ValExpTipoApoyo() As String
+        Get
+            Dim taTipoApoyo As New dsAppTableAdapters.CatTipoApoyoTableAdapter
+            Return taTipoApoyo.expRegTipoApoyo
+        End Get
+    End Property
+
+    Public ReadOnly Property ValExpRegion() As String
+        Get
+            Dim taRegion As New dsAppTableAdapters.CatRegionTableAdapter
+            Return taRegion.ExpRegRegion
+        End Get
+    End Property
+
+    Public ReadOnly Property ValExpEstado() As String
+        Get
+            Dim taEstado As New dsAppTableAdapters.spEstadoDDLTableAdapter
+            Return taEstado.ExpresionRegularEstado
+        End Get
+    End Property
+
+    Public ReadOnly Property ValExpMunicipio(ByVal CveEstado As String) As String
+        Get
+            Dim taMunicipio As New dsAppTableAdapters.spMunicipioDDLPorEstadoTableAdapter
+            Return taMunicipio.ExpresionRegularMunicipioPorEstado(CveEstado)
+        End Get
+    End Property
+
+    Private Sub EstablecerPermisos()
+        If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing _
+            And grdvProyectos.Rows.Count > 0) Then
+
+            Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
+                Case clsAuthentication.AuthorizationLevelList.Administering
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).Visible = True
+                    '**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).Visible = True
+                Case clsAuthentication.AuthorizationLevelList.Financial
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnActualizarEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnInfraestructuraEdt"), ImageButton).Visible = True
+
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).Visible = True
+
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).Visible = False
+                    '**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).Visible = False
+
+
+                Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).Visible = True
+                    '**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).Visible = True
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).Visible = False
+                Case clsAuthentication.AuthorizationLevelList.Consulting
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).Visible = False
+                    '**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).Visible = False
+                Case Else
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).Visible = False
+                    '**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).Visible = False
+                    CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).Visible = False
+            End Select
+        End If
+
+    End Sub
+
+#End Region
+
+#Region "EventosPagina"
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack() Then
+            If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+                Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
+                    Case clsAuthentication.AuthorizationLevelList.Administering
+                        ibtnNuevoDw.Visible = True
+                        ibtnNuevoUp.Visible = True
+                    Case clsAuthentication.AuthorizationLevelList.Financial
+                        ibtnNuevoDw.Visible = False
+                        ibtnNuevoUp.Visible = False
+                    Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
+                        ibtnNuevoDw.Visible = True
+                        ibtnNuevoUp.Visible = True
+                    Case clsAuthentication.AuthorizationLevelList.Consulting
+                        ibtnNuevoDw.Visible = False
+                        ibtnNuevoUp.Visible = False
+                    Case Else
+                        ibtnNuevoDw.Visible = False
+                        ibtnNuevoUp.Visible = False
+                End Select
+            End If
+            StartRowIndex = 1
+            Me.mviewProyectos.SetActiveView(Me.viewLista)
+            'Me.mviewProyectos.SetActiveView(Me.viewDetalle)
+            'revTipoApoyoAdd.ValidationExpression = ValExpTipoApoyo
+            'revRegionSegAdd.ValidationExpression = ValExpRegion
+        End If
+    End Sub
+
+#End Region
+
+#Region "Paginacion"
+
+    Protected Sub grdvProyectos_PageIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdvProyectos.PageIndexChanged
+        'PageIndex = grdvProyectos.PageIndex
+        EnableNavigation()
+    End Sub
+
+    Private Sub EnableNavigation()
+
+        PageIndex = grdvProyectos.PageIndex + 1
+        lblTotalProyectosUP.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
+        lblTotalProyectosDW.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
+        lblPaginaActualUP.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ MaximumRows) + 1)
+        lblPaginaActualDW.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ grdvProyectos.PageSize) + 1)
+
+
+    End Sub
+
+    Private ReadOnly Property TotalRowCount() As Integer
+        Get
+            Dim tatemas As New dsAppTableAdapters.Temas_RelacionadosTableAdapter
+            Dim Estatus As Integer
+            Dim Anio As Integer
+            Dim filtro As String
+            Dim CveInstitucion As Integer
+            If (txtBusqueda.Text <> String.Empty) Then filtro = txtBusqueda.Text Else filtro = ""
+            'If (ddlAnioProyectoBuscar.SelectedValue <> String.Empty) Then Anio = CInt(ddlAnioProyectoBuscar.SelectedValue) Else Anio = 0
+            'If (ddlInstitucionBuscar.SelectedValue <> String.Empty) Then CveInstitucion = CInt(ddlInstitucionBuscar.SelectedValue) Else CveInstitucion = 0
+
+            Return tatemas.spTemasRelacionados_CuentaTotalFiltro(filtro)
+        End Get
+    End Property
+
+    Private Property StartRowIndex() As Integer
+        Get
+            Dim o As Object = ViewState("StartRowIndex")
+            If o Is Nothing Then
+                Return 1
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("StartRowIndex") = value
+        End Set
+    End Property
+
+    Private Property MaximumRows() As Integer
+        Get
+            Dim o As Object = ViewState("MaximumRows")
+            If o Is Nothing Then
+                Return 10
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("MaximumRows") = value
+        End Set
+    End Property
+
+    Private Property PageIndex() As Integer
+        Get
+            Dim o As Object = ViewState("PageIndex")
+            If o Is Nothing Then
+                Return 1
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("PageIndex") = value
+        End Set
+    End Property
+
+    Private Property PagesPerGroup() As Integer
+        Get
+            Dim o As Object = ViewState("PagesPerGroup")
+            If o Is Nothing Then
+                Return 15
+            Else
+                Return CType(o, Integer)
+            End If
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("PagesPerGroup") = value
+        End Set
+    End Property
+#End Region
+
+#Region "Busqueda"
+
+
+    Protected Sub lnkbMasOpciones_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        'pnlMasOpcionesBusqueda.Visible = Not pnlMasOpcionesBusqueda.Visible
+        'ibtnBuscarProyectos.Visible = Not pnlMasOpcionesBusqueda.Visible
+        'If pnlMasOpcionesBusqueda.Visible Then
+        '    lnkbMasOpciones.Text = "- ocultar opciones"
+        'Else
+        '    lnkbMasOpciones.Text = "+ mas opciones ..."
+        'End If
+
+        grdvProyectos.DataBind()
+    End Sub
+
+    Protected Sub ibtnBuscarProyectos_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ibtnBuscarProyectos.Click
+        'StartRowIndex = 1
+        'MaximumRows = 10
+        'textoBusqueda = txtBusqueda.Text
+        'If Me.pnlMasOpcionesBusqueda.Visible Then
+        'CveProyectoBuscar = txtCveCONACYTBuscar.Text
+        'CveTipoApoyoBuscar = ddlTipoApoyoBuscar.SelectedValue
+        'CveEstatusBuscar = ddlEstatusBuscar.SelectedValue
+        'CveRegionBuscar = ddlRegionSegBuscar.SelectedValue
+        'AnioConvBuscar = ddlAnioProyectoBuscar.SelectedValue
+        'CveInstitucionBuscar = ddlInstitucionBuscar.SelectedValue
+        grdvProyectos.SelectedIndex = -1
+        grdvProyectos.EditIndex = -1
+        'Else
+        '    CveProyectoBuscar = String.Empty
+        '    CveTipoApoyoBuscar = "--"
+        '    CveEstatusBuscar = -1
+        '    CveRegionBuscar = "---"
+        '    AnioConvBuscar = 1900
+        '    CveInstitucionBuscar = -1
+
+        'End If
+        grdvProyectos.DataBind()
+    End Sub
+
+#End Region
+
+#Region "Proyectos"
+
+
+
+    Protected Sub grdvProyectos_RowEditing(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewEditEventArgs) Handles grdvProyectos.RowEditing
+        CurrentCveProyecto = grdvProyectos.DataKeys(e.NewEditIndex).Value
+        pnlBusqueda.Visible = False
+        pnlNavegacionUp.Visible = False
+        pnlNavegacionDw.Visible = False
+        odsTemas.FilterExpression = grdvProyectos.DataKeyNames(0) & " = '" & CurrentCveProyecto & "'"
+        grdvProyectos.DataBind()
+        e.NewEditIndex = 0
+    End Sub
+
+    Protected Sub grdvProyectos_RowCancelingEdit(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewCancelEditEventArgs) Handles grdvProyectos.RowCancelingEdit
+        CurrentCveProyecto = "-1"
+        pnlBusqueda.Visible = True
+        pnlNavegacionUp.Visible = True
+        pnlNavegacionDw.Visible = True
+        odsTemas.FilterExpression = String.Empty
+        grdvProyectos.SelectedIndex = -1
+        grdvProyectos.EditIndex = -1
+        grdvProyectos.DataBind()
+    End Sub
+    Protected Sub grdvProyectos_RowUpdating(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewUpdateEventArgs) Handles grdvProyectos.RowUpdating
+        'Dim taProyecto As New dsAppTableAdapters.ProyectoTableAdapter
+        Dim taObjeto As New dsAppTableAdapters.CatObjetoTableAdapter
+        Dim dtFehcaCaptura As Date
+
+        Try
+
+            If (IsDBNull(CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value)) Or _
+                (CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value = String.Empty) Then
+                dtFehcaCaptura = Date.Now
+            Else
+                dtFehcaCaptura = CDate(CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value)
+            End If
+            'Los valores que hay que poner correctamente
+            e.NewValues("FechaUltAct") = Date.Now
+            e.NewValues("FechaCaptura") = dtFehcaCaptura
+            e.NewValues("CveObjeto") = CInt(taObjeto.GetCveObjetoByCveTipoApoyo(CType(grdvProyectos.Rows(e.RowIndex).FindControl("ddlTipoProyectoEdt"), DropDownList).SelectedValue))
+            e.NewValues("FechaConvAcue") = CType(grdvProyectos.Rows(e.RowIndex).FindControl("uppaFechaConvenioAcuerdoEdt").FindControl("dpkrFechaConvAcueEdt"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text
+
+
+            grdvProyectos.EditIndex = -1
+            grdvProyectos.DataBind()
+            pnlBusqueda.Visible = True
+            pnlNavegacionUp.Visible = True
+            pnlNavegacionDw.Visible = True
+
+        Catch ex As Exception
+            e.Cancel = True
+            CType(grdvProyectos.Rows(e.RowIndex).FindControl("cuvExcepcionesEdt"), CustomValidator).ErrorMessage = "Ocurrió un error al intentar guardar"
+            CType(grdvProyectos.Rows(e.RowIndex).FindControl("cuvExcepcionesEdt"), CustomValidator).ToolTip = "Ocurrió un error al intentar guardar"
+            CType(grdvProyectos.Rows(e.RowIndex).FindControl("cuvExcepcionesEdt"), CustomValidator).IsValid = False
+        Finally
+            'taProyecto.Dispose()
+            taObjeto.Dispose()
+        End Try
+    End Sub
+
+    Protected Sub ibtnNuevoUp_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ibtnNuevoUp.Click
+        mviewProyectos.SetActiveView(viewAgregar)
+    End Sub
+
+    Protected Sub ibtnNuevoDw_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ibtnNuevoDw.Click
+        mviewProyectos.SetActiveView(viewAgregar)
+    End Sub
+
+    Protected Sub ibtnCancelarAdd_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ibtnCancelarAdd.Click
+        grdvProyectos.EditIndex = -1
+        grdvProyectos.DataBind()
+        ClearFieldAdding()
+        mviewProyectos.SetActiveView(viewLista)
+    End Sub
+
+
+    Protected Sub grdvProyectos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdvProyectos.RowDataBound
+        'NORMAL SIN EDICION
+        If e.Row.RowType = DataControlRowType.DataRow And (e.Row.RowState = DataControlRowState.Normal Or e.Row.RowState = DataControlRowState.Alternate) Then
+            Dim DataField As DataControlFieldCell = CType(e.Row.Controls(0), DataControlFieldCell)
+            Dim producto As dsApp.Temas_RelacionadosRow = _
+                CType(CType(e.Row.DataItem, DataRowView).Row, dsApp.Temas_RelacionadosRow)
+            'Dim product As dsApp.ProyectoRow = _
+            '    CType(CType(e.Row.DataItem, DataRowView).Row, dsApp.ProyectoRow)
+
+            'Dim db As ImageButton = CType(DataField.FindControl("ibtnEliminarIT"), ImageButton)
+            'Dim ibtnEditar As ImageButton = CType(DataField.FindControl("ibtnEditarIT"), ImageButton)
+            'Dim txtValidar As TextBox = CType(DataField.FindControl("txtVal"), TextBox)
+
+            'If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+            '    Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
+            '        Case clsAuthentication.AuthorizationLevelList.Administering
+            '            ibtnEditar.Visible = True
+            '            db.Visible = True
+            '            txtValidar.Visible = True
+            '        Case clsAuthentication.AuthorizationLevelList.Financial
+            '            ibtnEditar.Visible = True
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '        Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
+            '            ibtnEditar.Visible = True
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '        Case clsAuthentication.AuthorizationLevelList.Consulting
+            '            ibtnEditar.Visible = False
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '        Case Else
+            '            ibtnEditar.Visible = False
+            '            db.Visible = False
+            '            txtValidar.Visible = False
+            '    End Select
+            'End If
+
+            'db.OnClientClick = String.Format( _
+            '    "return confirm('¿Desea eliminar el proyecto {0}?');", _
+            '    producto.id_tema)
+            'product.CveProyecto.Replace("'", "\'"))
+        End If
+        'FILA QUE SE ESTA EDITANDO
+        If e.Row.RowState = DataControlRowState.Edit And e.Row.RowType = DataControlRowType.DataRow Then
+            EstablecerPermisos()
+        End If
+    End Sub
+
+    Protected Sub ibtnActualizarAdd_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ibtnActualizarAdd.Click
+        'Dim taProyecto As New dsAppTableAdapters.ProyectoTableAdapter
+        Dim taObjeto As New dsAppTableAdapters.CatObjetoTableAdapter
+
+        Dim taTemas As New dsAppTableAdapters.Temas_RelacionadosTableAdapter
+
+
+        Try
+            taTemas.spTemasRelacionados_Insert(txtNombreAdd.Text, ddlInstitucionAdd.SelectedValue, txtTituloAdd.Text, txtlinkAdd.Text)
+
+            lblEstatusAdd.Text = "Proyecto ' " & txtCveTemasBuscar.Text & " ' insertado con éxito"
+            lblEstatusAdd.Visible = True
+            txtBusqueda.Text = txtCveTemasBuscar.Text
+            odsTemas.DataBind()
+            grdvProyectos.DataBind()
+            mviewProyectos.SetActiveView(viewLista)
+            ClearFieldAdding()
+
+        Catch concurrencyEx As DBConcurrencyException
+            cuvExcepcionesAdd.ErrorMessage = "No se pueden guardar los datos porque la base de datos esta siendo utilizada"
+            cuvExcepcionesAdd.ToolTip = "No se pueden guardar los datos porque la base de datos esta siendo utilizada"
+            cuvExcepcionesAdd.IsValid = False
+        Catch constraintEx As ConstraintException
+            cuvExcepcionesAdd.ErrorMessage = "Error de llaves duplicadas"
+            cuvExcepcionesAdd.ToolTip = "Error de llaves duplicadas"
+            cuvExcepcionesAdd.IsValid = False
+        Catch deletedRowEx As DeletedRowInaccessibleException
+            cuvExcepcionesAdd.ErrorMessage = "Fila no accesible"
+            cuvExcepcionesAdd.ToolTip = "Fila no accesible"
+            cuvExcepcionesAdd.IsValid = False
+        Catch duplicateNameEx As DuplicateNameException
+            cuvExcepcionesAdd.ErrorMessage = "Nombre duplicado"
+            cuvExcepcionesAdd.ToolTip = "Nombre duplicado"
+            cuvExcepcionesAdd.IsValid = False
+        Catch inRowChangingEx As InRowChangingEventException
+            cuvExcepcionesAdd.ErrorMessage = "Fila esta siendo modificada"
+            cuvExcepcionesAdd.ToolTip = "Fila esta siendo modificada"
+            cuvExcepcionesAdd.IsValid = False
+        Catch invalidConstraintEx As InvalidConstraintException
+            cuvExcepcionesAdd.ErrorMessage = "Restricción no válida"
+            cuvExcepcionesAdd.ToolTip = "Restricción no válida"
+            cuvExcepcionesAdd.IsValid = False
+        Catch invalidExpressionEx As InvalidExpressionException
+            cuvExcepcionesAdd.ErrorMessage = "Expresión no válida"
+            cuvExcepcionesAdd.ToolTip = "Expresión no válida"
+            cuvExcepcionesAdd.IsValid = False
+        Catch missingPrimaryEx As MissingPrimaryKeyException
+            cuvExcepcionesAdd.ErrorMessage = "No se encontró una llave principal"
+            cuvExcepcionesAdd.ToolTip = "No se encontró una llave principal"
+            cuvExcepcionesAdd.IsValid = False
+        Catch noNullEx As NoNullAllowedException
+            cuvExcepcionesAdd.ErrorMessage = "Valor nulo no permitido"
+            cuvExcepcionesAdd.ToolTip = "Valor nulo no permitido"
+            cuvExcepcionesAdd.IsValid = False
+        Catch readOnlyEx As ReadOnlyException
+            cuvExcepcionesAdd.ErrorMessage = "La base de datos es de solo lectura"
+            cuvExcepcionesAdd.ToolTip = "La base de datos es de solo lectura"
+            cuvExcepcionesAdd.IsValid = False
+        Catch rowNotInTableEx As RowNotInTableException
+            cuvExcepcionesAdd.ErrorMessage = "La fila solicitada no esta en la base de datos"
+            cuvExcepcionesAdd.ToolTip = "La fila solicitada no esta en la base de datos"
+            cuvExcepcionesAdd.IsValid = False
+        Catch strongTypingEx As StrongTypingException
+            cuvExcepcionesAdd.ErrorMessage = "Error en tipos de datos"
+            cuvExcepcionesAdd.ToolTip = "Error en tipos de datos"
+            cuvExcepcionesAdd.IsValid = False
+        Catch typedDataSetEx As TypedDataSetGeneratorException
+            cuvExcepcionesAdd.ErrorMessage = "No fue posible generar el conjunto de datos"
+            cuvExcepcionesAdd.ToolTip = "No fue posible generar el conjunto de datos"
+            cuvExcepcionesAdd.IsValid = False
+        Catch versionNotFoundEx As VersionNotFoundException
+            cuvExcepcionesAdd.ErrorMessage = "Versión no encontrada"
+            cuvExcepcionesAdd.ToolTip = "Versión no encontrada"
+            cuvExcepcionesAdd.IsValid = False
+        Catch dataEx As DataException
+            cuvExcepcionesAdd.ErrorMessage = "Error de datos"
+            cuvExcepcionesAdd.ToolTip = "Error de datos"
+            cuvExcepcionesAdd.IsValid = False
+        Catch ex As Exception
+            cuvExcepcionesAdd.ErrorMessage = "Ocurrió un error al intentar guardar " & ex.Message
+            cuvExcepcionesAdd.ToolTip = "Ocurrió un error al intentar guardar"
+            cuvExcepcionesAdd.IsValid = False
+        End Try
+    End Sub
+
+    Protected Sub grdvProyectos_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles grdvProyectos.SelectedIndexChanged
+        'Indicar cual se va ha ver el detalle
+        hdCveProyecto_Detalle.Value = grdvProyectos.DataKeys(grdvProyectos.SelectedIndex).Value
+        frmvProyecto_Detalle.DataBind()
+        mviewProyectos.SetActiveView(viewDetalle)
+        grdvProyectos.SelectedIndex = -1
+        pnlBusqueda.Visible = False
+        pnlNavegacionUp.Visible = False
+        pnlNavegacionDw.Visible = False
+    End Sub
+    Protected Sub frmvProyecto_Detalle_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles frmvProyecto_Detalle.DataBound
+        CType(frmvProyecto_Detalle.FindControl("lblCveProyectoST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblCveProyectoST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        CType(frmvProyecto_Detalle.FindControl("lblNombreProyectoST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblNombreProyectoST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        CType(frmvProyecto_Detalle.FindControl("lbInstitucion"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbInstitucion"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        CType(frmvProyecto_Detalle.FindControl("lbTitulo"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbTitulo"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("lblImpactosEsperadosST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblImpactosEsperadosST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("lblUsuarioTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblUsuarioTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("lblMaterialesTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblMaterialesTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("lblRequisitosTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblRequisitosTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("lblActividadesTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblActividadesTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+    End Sub
+    Protected Sub ibtnRegresar_Detalle_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ibtnRegresar_Detalle.Click
+        mviewProyectos.SetActiveView(viewLista)
+        pnlBusqueda.Visible = True
+        pnlNavegacionUp.Visible = True
+        pnlNavegacionDw.Visible = True
+    End Sub
+
+    Protected Sub ibtnExpandirTT_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs)
+        'pnlExpandirTT.Visible = Not pnlExpandirTT.Visible
+        'lblMasInfoTTST.Visible = Not lblMasInfoTTST.Visible
+        'If pnlExpandirTT.Visible Then
+        '    ibtnExpandirTTST.ImageUrl = "~/images/aplicacion/contraer.gif"
+        'Else
+        '    ibtnExpandirTTST.ImageUrl = "~/images/aplicacion/expandir.gif"
+        'End If
+    End Sub
+
+    Protected Sub ibtnExpandirObjetivosST_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs)
+        'pnlExpandirObjetivosST.Visible = Not pnlExpandirObjetivosST.Visible
+        'lblMasInfoObjetivosST.Visible = Not lblMasInfoObjetivosST.Visible
+        'If pnlExpandirObjetivosST.Visible Then
+        '    ibtnExpandirObjetivosST.ImageUrl = "~/images/aplicacion/contraer.gif"
+        'Else
+        '    ibtnExpandirObjetivosST.ImageUrl = "~/images/aplicacion/expandir.gif"
+        'End If
+    End Sub
+
+    Protected Sub ibtnMasInfoGralST_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs)
+        'pnlMasInfoGralST.Visible = Not pnlMasInfoGralST.Visible
+        'lblMasInfoGralST.Visible = Not lblMasInfoGralST.Visible
+        'If pnlMasInfoGralST.Visible Then
+        '    ibtnMasInfoGralST.ImageUrl = "~/images/aplicacion/contraer.gif"
+        'Else
+        '    ibtnMasInfoGralST.ImageUrl = "~/images/aplicacion/expandir.gif"
+        'End If
+    End Sub
+
+    Private Sub SelPestaniaDatosGenerales()
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_dg_sel.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_et_rep.gif"
+        '**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_pr_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_pa_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_es_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_st_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_dm_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_dd_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_vt_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_sg_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_ad_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnInfraestructuraEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_in_rep.gif"
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("mviewProyectosEdt"), MultiView).SetActiveView(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("viewInfraestructuraEdt"), View))
+    End Sub
+    Protected Sub ibtnDatosGeneralesEdt_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs)
+        SelPestaniaDatosGenerales()
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("mviewProyectosEdt"), MultiView).SetActiveView(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("viewDatosGeneralesEdt"), View))
+        'odsProyecto.FilterExpression = grdvProyectos.DataKeyNames(0) & " = '" + grdvProyectos.DataKeys(grdvProyectos.EditIndex).Value + "'"
+        'grdvProyectos.DataBind()
+        EstablecerPermisos()
+    End Sub
+
+    Protected Sub odsProyecto_Selecting(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs) Handles odsTemas.Selecting
+        'e.InputParameters("Busqueda") = textoBusqueda
+        'e.InputParameters("CveTipoApoyo") = CveTipoApoyoBuscar
+        'e.InputParameters("CveEstatus") = CveEstatusBuscar
+        'e.InputParameters("CveRegion") = CveRegionBuscar
+        'e.InputParameters("AnioConvocatoria") = AnioConvBuscar
+        'e.InputParameters("CveInstitucion") = CveInstitucionBuscar
+        EnableNavigation()
+    End Sub
+
+#End Region
+
+
+
+
+    Private Sub ClearFieldAdding()
+        txtNombreAdd.Text = String.Empty
+        txtlinkAdd.Text = String.Empty
+        txtTituloAdd.Text = String.Empty
+        ddlInstitucionAdd.SelectedValue = -1
+    End Sub
+
+
 
 End Class
