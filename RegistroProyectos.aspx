@@ -228,8 +228,8 @@
                             PropertyName="SelectedValue" Type="Int32" />
                         <asp:ControlParameter ControlID="ddlInstitucionBuscar" Name="CveInstitucion" 
                             PropertyName="SelectedValue" Type="Int32" />
-                         <asp:ControlParameter ControlID="ddlTipoProyectoFill" Name="TipoProy" 
-                            PropertyName="SelectedValue" Type="Int32" />
+                         <%--<asp:ControlParameter ControlID="ddlTipoProyectoFill" Name="TipoProy" 
+                            PropertyName="SelectedValue" Type="Int32" />--%>
                     </SelectParameters>
                     
                 </asp:ObjectDataSource>

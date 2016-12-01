@@ -73,7 +73,7 @@ Partial Class RegistroProyectos2
             If (ddlAnioProyectoBuscar.SelectedValue <> String.Empty) Then Anio = CInt(ddlAnioProyectoBuscar.SelectedValue) Else Anio = 0
             If (ddlInstitucionBuscar.SelectedValue <> String.Empty) Then CveInstitucion = CInt(ddlInstitucionBuscar.SelectedValue) Else CveInstitucion = 0
             If (ddlTipoProyectoFill.SelectedValue <> String.Empty) Then TipoProy = CInt(ddlTipoProyectoFill.SelectedValue) Else TipoProy = 0
-            Return taProyectos.CuentaTotalProyectosFiltrado(txtBusqueda.Text, ddlTipoApoyoBuscar.SelectedValue, Estatus, ddlRegionSegBuscar.SelectedValue, Anio, CveInstitucion, TipoProy)
+            Return taProyectos.CuentaTotalProyectosFiltrado(txtBusqueda.Text, ddlTipoApoyoBuscar.SelectedValue, Estatus, ddlRegionSegBuscar.SelectedValue, Anio, CveInstitucion)
         End Get
     End Property
 
