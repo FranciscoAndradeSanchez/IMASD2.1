@@ -9,7 +9,6 @@ Partial Class _Default
         intResultado = authIniciarSesion.AuthenticateUser(Me.txtUsuario.Text, Me.txtContrasenia.Text)
         Select Case intResultado
             Case clsAuthentication.AuthenticationStatusList.Autheticated
-
                 Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) = Me.txtUsuario.Text
                 Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNombre").ToString) = authIniciarSesion.Name
                 Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString) = authIniciarSesion.AccesLevel

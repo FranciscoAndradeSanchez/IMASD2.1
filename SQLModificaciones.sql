@@ -96,3 +96,32 @@ BEGIN
 	WHERE id_tema LIKE '%'+@filtro+'%' or  Nombre_Proyecto Like '%'+@filtro+'%' or Titulo  Like '%'+@filtro+'%' or Institucion  Like '%'+@filtro+'%'
 END
 GO
+------------------------------------------------------
+
+create table APrivacidadCorreo
+(
+	NoEnvio int identity,
+	CveUsuario Varchar(20) not null,
+	CveProyecto varchar(20),
+	CveProducto varchar(20),
+	Enviado binary,
+	fecha Datetime not null,
+	constraint ok_avisopc primary key(NoEnvio)
+) 
+
+---------------------------------------------
+
+Create Procedure spAPrivacidadCorreo_Insert
+(
+	@CveUsuario varchar(20),
+	@CveProyecto varchar(20), 
+	@CveProducto varchar(20), 
+	@Enviado binary, 
+	@fecha datetime
+)
+As
+begin
+INSERT INTO dbo.APrivacidadCorreo (CveUsuario, CveProyecto, CveProducto, Enviado, Fecha)
+     VALUES (@CveUsuario, @CveProyecto, @CveProducto, @Enviado, @fecha)
+end
+GO

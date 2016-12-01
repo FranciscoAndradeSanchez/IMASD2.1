@@ -22,6 +22,7 @@ Partial Class contactanos
             Me.cmvComentario.ErrorMessage = "No fue posible enviar su comentario intente de nuevo mas tarde." & exEnvCorreo.Message
             Me.cmvComentario.ToolTip = "No fue posible enviar su comentario intente de nuevo mas tarde."
             Me.cmvComentario.IsValid = False
+
         End Try
     End Sub
 
@@ -36,4 +37,7 @@ Partial Class contactanos
         Me.txtSugerencia.Text = String.Empty
         Me.mviewContactanos.SetActiveView(Me.viewSugerencia)
     End Sub
+
+   
+
 End Class
