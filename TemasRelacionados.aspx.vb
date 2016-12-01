@@ -212,14 +212,18 @@ Partial Class TemasRelacionados
     End Sub
 
     Private Sub EnableNavigation()
-
+        Dim totalrow As Integer
+        totalrow = TotalRowCount()
         PageIndex = grdvProyectos.PageIndex + 1
-        lblTotalProyectosUP.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
-        lblTotalProyectosDW.Text = String.Format("{0} proyectos encontrados", TotalRowCount)
-        lblPaginaActualUP.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ MaximumRows) + 1)
-        lblPaginaActualDW.Text = String.Format("Página {0} de {1}", PageIndex, (TotalRowCount \ grdvProyectos.PageSize) + 1)
-
-
+        lblTotalProyectosUP.Text = String.Format("{0} proyectos encontrados", totalrow)
+        lblTotalProyectosDW.Text = String.Format("{0} proyectos encontrados", totalrow)
+        If totalrow > 10 Then
+            lblPaginaActualUP.Text = String.Format("Página {0} de {1}", PageIndex, (totalrow \ MaximumRows) + 1)
+            lblPaginaActualDW.Text = String.Format("Página {0} de {1}", PageIndex, (totalrow \ grdvProyectos.PageSize) + 1)
+        Else
+            lblPaginaActualUP.Text = "Página 1 de 1"
+            lblPaginaActualDW.Text = "Página 1 de 1"
+        End If
     End Sub
 
     Private ReadOnly Property TotalRowCount() As Integer
@@ -332,6 +336,7 @@ Partial Class TemasRelacionados
 
         'End If
         grdvProyectos.DataBind()
+
     End Sub
 
 #End Region
@@ -343,8 +348,8 @@ Partial Class TemasRelacionados
     Protected Sub grdvProyectos_RowEditing(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewEditEventArgs) Handles grdvProyectos.RowEditing
         CurrentCveProyecto = grdvProyectos.DataKeys(e.NewEditIndex).Value
         pnlBusqueda.Visible = False
-        pnlNavegacionUp.Visible = False
-        pnlNavegacionDw.Visible = False
+        pnlNavegacionUp.Visible = True
+        pnlNavegacionDw.Visible = True
         odsTemas.FilterExpression = grdvProyectos.DataKeyNames(0) & " = '" & CurrentCveProyecto & "'"
         grdvProyectos.DataBind()
         e.NewEditIndex = 0
@@ -367,17 +372,27 @@ Partial Class TemasRelacionados
 
         Try
 
-            If (IsDBNull(CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value)) Or _
-                (CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value = String.Empty) Then
-                dtFehcaCaptura = Date.Now
-            Else
-                dtFehcaCaptura = CDate(CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value)
-            End If
+            'If (IsDBNull(CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value)) Or _
+            '    (CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value = String.Empty) Then
+            '    dtFehcaCaptura = Date.Now
+            'Else
+            '    dtFehcaCaptura = CDate(CType(grdvProyectos.Rows(e.RowIndex).FindControl("hdnfFechaCapturaEdt"), HiddenField).Value)
+            'End If
             'Los valores que hay que poner correctamente
-            e.NewValues("FechaUltAct") = Date.Now
-            e.NewValues("FechaCaptura") = dtFehcaCaptura
-            e.NewValues("CveObjeto") = CInt(taObjeto.GetCveObjetoByCveTipoApoyo(CType(grdvProyectos.Rows(e.RowIndex).FindControl("ddlTipoProyectoEdt"), DropDownList).SelectedValue))
-            e.NewValues("FechaConvAcue") = CType(grdvProyectos.Rows(e.RowIndex).FindControl("uppaFechaConvenioAcuerdoEdt").FindControl("dpkrFechaConvAcueEdt"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text
+            'e.NewValues("Original_id_tema") = CType(grdvProyectos.Rows(e.RowIndex).FindControl("id_temaLabel1"), Label).Text
+            'e.NewValues("Nombre_Proyecto") = CType(grdvProyectos.Rows(e.RowIndex).FindControl("Nombre_ProyectoEdit"), TextBox).Text
+            'e.NewValues("Titulo") = CType(grdvProyectos.Rows(e.RowIndex).FindControl("TituloEdit"), TextBox).Text
+            'e.NewValues("Institucion") = CInt(taObjeto.GetCveObjetoByCveTipoApoyo(CType(grdvProyectos.Rows(e.RowIndex).FindControl("ddlInstitucionEdt"), DropDownList).SelectedValue))
+            'e.NewValues("link") = CType(grdvProyectos.Rows(e.RowIndex).FindControl("linkEdit"), TextBox).Text
+
+            'Dim a As String = CType(grdvProyectos.Rows(e.RowIndex).FindControl("id_temaLabel1"), Label).Text
+            'Dim b As String = CType(grdvProyectos.Rows(e.RowIndex).FindControl("Nombre_ProyectoEdit"), TextBox).Text
+            'Dim c As String = CType(grdvProyectos.Rows(e.RowIndex).FindControl("TituloEdit"), TextBox).Text
+            'Dim d As String = CInt(taObjeto.GetCveObjetoByCveTipoApoyo(CType(grdvProyectos.Rows(e.RowIndex).FindControl("ddlInstitucionEdt"), DropDownList).SelectedValue))
+            'Dim f As String = CType(grdvProyectos.Rows(e.RowIndex).FindControl("linkEdit"), TextBox).Text
+            'If f = String.Empty Then
+            '    e.NewValues("link") = "N/A"
+            'End If
 
 
             grdvProyectos.EditIndex = -1
@@ -414,7 +429,7 @@ Partial Class TemasRelacionados
 
 
     Protected Sub grdvProyectos_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles grdvProyectos.RowDataBound
-        'NORMAL SIN EDICION
+        'NORMAL SIN EDICION 
         If e.Row.RowType = DataControlRowType.DataRow And (e.Row.RowState = DataControlRowState.Normal Or e.Row.RowState = DataControlRowState.Alternate) Then
             Dim DataField As DataControlFieldCell = CType(e.Row.Controls(0), DataControlFieldCell)
             Dim producto As dsApp.Temas_RelacionadosRow = _
@@ -422,39 +437,39 @@ Partial Class TemasRelacionados
             'Dim product As dsApp.ProyectoRow = _
             '    CType(CType(e.Row.DataItem, DataRowView).Row, dsApp.ProyectoRow)
 
-            'Dim db As ImageButton = CType(DataField.FindControl("ibtnEliminarIT"), ImageButton)
-            'Dim ibtnEditar As ImageButton = CType(DataField.FindControl("ibtnEditarIT"), ImageButton)
+            Dim db As ImageButton = CType(DataField.FindControl("btnEliminar"), ImageButton)
+            Dim ibtnEditar As ImageButton = CType(DataField.FindControl("btnEditar"), ImageButton)
             'Dim txtValidar As TextBox = CType(DataField.FindControl("txtVal"), TextBox)
 
-            'If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
-            '    Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
-            '        Case clsAuthentication.AuthorizationLevelList.Administering
-            '            ibtnEditar.Visible = True
-            '            db.Visible = True
-            '            txtValidar.Visible = True
-            '        Case clsAuthentication.AuthorizationLevelList.Financial
-            '            ibtnEditar.Visible = True
-            '            db.Visible = False
-            '            txtValidar.Visible = False
-            '        Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
-            '            ibtnEditar.Visible = True
-            '            db.Visible = False
-            '            txtValidar.Visible = False
-            '        Case clsAuthentication.AuthorizationLevelList.Consulting
-            '            ibtnEditar.Visible = False
-            '            db.Visible = False
-            '            txtValidar.Visible = False
-            '        Case Else
-            '            ibtnEditar.Visible = False
-            '            db.Visible = False
-            '            txtValidar.Visible = False
-            '    End Select
-            'End If
+            If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+                Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
+                    Case clsAuthentication.AuthorizationLevelList.Administering
+                        ibtnEditar.Visible = True
+                        db.Visible = True
+                        'txtValidar.Visible = True
+                    Case clsAuthentication.AuthorizationLevelList.Financial
+                        ibtnEditar.Visible = True
+                        db.Visible = False
+                        'txtValidar.Visible = False
+                    Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
+                        ibtnEditar.Visible = True
+                        db.Visible = False
+                        'txtValidar.Visible = False
+                    Case clsAuthentication.AuthorizationLevelList.Consulting
+                        ibtnEditar.Visible = False
+                        db.Visible = False
+                        ' txtValidar.Visible = False
+                    Case Else
+                        ibtnEditar.Visible = False
+                        db.Visible = False
+                        'txtValidar.Visible = False
+                End Select
+            End If
 
-            'db.OnClientClick = String.Format( _
-            '    "return confirm('¿Desea eliminar el proyecto {0}?');", _
-            '    producto.id_tema)
-            'product.CveProyecto.Replace("'", "\'"))
+            db.OnClientClick = String.Format( _
+                "return confirm('¿Desea eliminar el proyecto {0}?');", _
+                producto.id_tema)
+            ' product.CveProyecto.Replace("'", "\'"))
         End If
         'FILA QUE SE ESTA EDITANDO
         If e.Row.RowState = DataControlRowState.Edit And e.Row.RowType = DataControlRowType.DataRow Then
@@ -470,7 +485,10 @@ Partial Class TemasRelacionados
 
 
         Try
-            taTemas.spTemasRelacionados_Insert(txtNombreAdd.Text, ddlInstitucionAdd.SelectedValue, txtTituloAdd.Text, txtlinkAdd.Text)
+            'If txtlinkAdd.Text = String.Empty Then
+            '    txtlinkAdd.Text = "N/A"
+            'End If
+            taTemas.spTemasRelacionados_Insert(txtNombreAdd.Text, ddlInstitucionAdd.SelectedValue, txtTituloAdd.Text, "")
 
             lblEstatusAdd.Text = "Proyecto ' " & txtCveTemasBuscar.Text & " ' insertado con éxito"
             lblEstatusAdd.Visible = True
@@ -554,7 +572,7 @@ Partial Class TemasRelacionados
         mviewProyectos.SetActiveView(viewDetalle)
         grdvProyectos.SelectedIndex = -1
         pnlBusqueda.Visible = False
-        pnlNavegacionUp.Visible = False
+        pnlNavegacionUp.Visible = True
         pnlNavegacionDw.Visible = False
     End Sub
     Protected Sub frmvProyecto_Detalle_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles frmvProyecto_Detalle.DataBound
@@ -562,7 +580,7 @@ Partial Class TemasRelacionados
         CType(frmvProyecto_Detalle.FindControl("lblNombreProyectoST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblNombreProyectoST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         CType(frmvProyecto_Detalle.FindControl("lbInstitucion"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbInstitucion"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         CType(frmvProyecto_Detalle.FindControl("lbTitulo"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbTitulo"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
-        CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         'CType(frmvProyecto_Detalle.FindControl("lblImpactosEsperadosST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblImpactosEsperadosST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         'CType(frmvProyecto_Detalle.FindControl("lblUsuarioTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblUsuarioTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         'CType(frmvProyecto_Detalle.FindControl("lblMaterialesTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblMaterialesTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
@@ -646,7 +664,7 @@ Partial Class TemasRelacionados
 
     Private Sub ClearFieldAdding()
         txtNombreAdd.Text = String.Empty
-        txtlinkAdd.Text = String.Empty
+        'txtlinkAdd.Text = String.Empty
         txtTituloAdd.Text = String.Empty
         ddlInstitucionAdd.SelectedValue = -1
     End Sub

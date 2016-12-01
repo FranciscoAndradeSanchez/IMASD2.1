@@ -8,7 +8,7 @@
 
 <%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692FBEA5521E1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
-<%--<%@ Register assembly="CrystalDecisions.Web, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>--%>
+<%--<%@ Register assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" namespace="CrystalDecisions.Web" tagprefix="CR" %>--%>
 <asp:Content ID="cntReportes" ContentPlaceHolderID="cphReportes" Runat="Server">
     <asp:SiteMapPath ID="stmpReportes" runat="server">
         <PathSeparatorStyle ForeColor="DarkOliveGreen" />
@@ -21,7 +21,7 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
                 <tr>
                     <th colspan="2" class="thtablaComun">
-                        &nbsp;Par·metros del reporte de estatus de los proyectos</th>
+                        &nbsp;Par√°metros del reporte de estatus de los proyectos</th>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%;">
-                        AÒo de la convocatoria</td>
+                        A√±o de la convocatoria</td>
                     <td style="width: 70%;">
                         <asp:DropDownList ID="ddlAnioConvocatoriaRepEst" runat="server" DataSourceID="odsAnioConvocatoriaRepEst"
                             DataTextField="AnioDesc" DataValueField="Anio">
@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        RegiÛn</td>
+                        Regi√≥n</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlRegionRepEst" runat="server" DataSourceID="odsRegionRepEst" DataTextField="DesRegion"
                             DataValueField="CveRegion">
@@ -96,7 +96,7 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
                 <tr>
                     <th colspan="2" class="thtablaComun">
-                        &nbsp;Par·metros de los reportes financieros</th>
+                        &nbsp;Par√°metros de los reportes financieros</th>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -155,7 +155,7 @@
                                             <asp:Panel ID="pnlEdoCuentaRepFin" runat="server" Height="100%" Width="100%" Visible="False"><table border="0" cellpadding="3" cellspacing="0" width="100%">
                                                 <tr>
                                                     <td style="width: 30%">
-                                                        AÒo de la convocatoria</td>
+                                                        A√±o de la convocatoria</td>
                                                     <td style="width: 70%">
                                                         <asp:DropDownList ID="ddlAnioConvRepFin" runat="server" DataSourceID="odsAnioConvocatoriaRepEst"
                                                             DataTextField="AnioDesc" DataValueField="Anio">
@@ -189,7 +189,7 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
                 <tr>
                     <th colspan="2" class="thtablaComun">
-                        &nbsp;Par·metros del reporte acumulado de proyectos</th>
+                        &nbsp;Par√°metros del reporte acumulado de proyectos</th>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -208,15 +208,15 @@
                             <asp:ListItem Value="VEGETACION">Vegetaci&#243;n</asp:ListItem>
                             <asp:ListItem Value="TEMATICA">&#193;rea tem&#225;tica</asp:ListItem>
                             <asp:ListItem Value="ESTATUS">Estatus</asp:ListItem>
-                            <asp:ListItem Value="RTECNICO">Responsable TÈcnico</asp:ListItem>
+                            <asp:ListItem Value="RTECNICO">Responsable T√©cnico</asp:ListItem>
                         </asp:CheckBoxList>
                         <asp:CustomValidator ID="cuvAgruparPorRepAcu" runat="server" ControlToValidate="ddlAnioConvRepAcu"
-                            ErrorMessage="Debe seleccionar al menos un valor de agrupaciÛn" ForeColor=""
-                            ToolTip="Debe seleccionar al menos un valor de agrupaciÛn">x</asp:CustomValidator></td>
+                            ErrorMessage="Debe seleccionar al menos un valor de agrupaci√≥n" ForeColor=""
+                            ToolTip="Debe seleccionar al menos un valor de agrupaci√≥n">x</asp:CustomValidator></td>
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        AÒo de la convocatoria</td>
+                        A√±o de la convocatoria</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlAnioConvRepAcu" runat="server" DataSourceID="odsAnioConvocatoriaRepEst"
                                                             DataTextField="AnioDesc" DataValueField="Anio">
@@ -224,7 +224,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        RegiÛn</td>
+                        Regi√≥n</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlRegionRepAcu" runat="server" DataSourceID="odsRegionRepEst" DataTextField="DesRegion"
                             DataValueField="CveRegion">
@@ -249,7 +249,7 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
                 <tr>
                     <th colspan="2" class="thtablaComun">
-                        &nbsp;Par·metros del reporte de estatus de los productos</th>
+                        &nbsp;Par√°metros del reporte de estatus de los productos</th>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -257,7 +257,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%;">
-                        AÒo de la convocatoria</td>
+                        A√±o de la convocatoria</td>
                     <td style="width: 70%;">
                         <asp:DropDownList ID="ddlAnioConvRepPro" runat="server" DataSourceID="odsAnioConvocatoriaRepEst"
                             DataTextField="AnioDesc" DataValueField="Anio">
@@ -276,7 +276,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        Area tem·tica</td>
+                        Area tem√°tica</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlAreaTematicaRepPro" runat="server" DataSourceID="odsAreaTematicaRepPro" DataTextField="AreaTematica"
                             DataValueField="CveAreaTematica">
@@ -319,10 +319,10 @@
                 </tr>
                 <%--<tr>
                     <td style="width: 30%;">
-                        N˙mero de productos a mostrar</td>
+                        N√∫mero de productos a mostrar</td>
                     <td style="width: 70%;">
                         &nbsp;<asp:TextBox ID="txtNumProductos" runat="server" MaxLength="10">20</asp:TextBox><asp:RegularExpressionValidator ID="revNumProductos" runat="server" ControlToValidate="txtNumProductos"
-                            ErrorMessage="Solo se admite un valor numÈrico" ForeColor="" ToolTip="Solo se admite un valor numÈrico" ValidationExpression="^[0-9]{1,10}">Solo se admite un valor numÈrico</asp:RegularExpressionValidator></td>
+                            ErrorMessage="Solo se admite un valor num√©rico" ForeColor="" ToolTip="Solo se admite un valor num√©rico" ValidationExpression="^[0-9]{1,10}">Solo se admite un valor num√©rico</asp:RegularExpressionValidator></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -340,7 +340,7 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
                 <tr>
                     <th colspan="2" class="thtablaComun">
-                        &nbsp;Par·metros del reporte de usuarios</th>
+                        &nbsp;Par√°metros del reporte de usuarios</th>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -359,7 +359,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        Uso de la informaciÛn</td>
+                        Uso de la informaci√≥n</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlUsoInfoRepUsr" runat="server" DataSourceID="odsUsoInfo" DataTextField="DesUsoInfo"
                             DataValueField="CveUsoInfo">
@@ -384,9 +384,9 @@
         </asp:View>
         <asp:View ID="viewFiltrarBeneficiarios" runat="server">
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
-                <tr><th colspan="2" class="thtablaComun">&nbsp;Par·metros del reporte de beneficiarios</th></tr>
+                <tr><th colspan="2" class="thtablaComun">&nbsp;Par√°metros del reporte de beneficiarios</th></tr>
                 <tr><td colspan="2">&nbsp;</td></tr>
-                <tr><td colspan="2">Proyectos con un n˙mero de beneficiarios...</td></tr>                
+                <tr><td colspan="2">Proyectos con un n√∫mero de beneficiarios...</td></tr>                
                 <tr><td style="width: 10%; text-align:right;">Desde:</td>
                     <td style="width: 90%"><asp:TextBox ID="txtBeneficiariosDesde" runat="server" Width="40px" Text="0" /></td>
                 </tr>
@@ -404,7 +404,7 @@
             <table border="0" cellpadding="3" cellspacing="0" width="100%" style="background-image: url(images/default/fondocontenido.jpg)" class="tablaComun">
                 <tr>
                     <th colspan="2" class="thtablaComun">
-                        &nbsp;Par·metros del reporte de Infraestructura comprada</th>
+                        &nbsp;Par√°metros del reporte de Infraestructura comprada</th>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -419,7 +419,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        InstituciÛn</td>
+                        Instituci√≥n</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlInstitucionRepInfra" runat="server" DataSourceID="odsInstitucionRepInfra" DataTextField="DesInstitucion" DataValueField="CveInstitucion">
                         </asp:DropDownList>
@@ -428,7 +428,7 @@
                 </tr>
                 <tr>
                     <td style="width: 30%">
-                        RegiÛn</td>
+                        Regi√≥n</td>
                     <td style="width: 70%">
                         <asp:DropDownList ID="ddlRegionRepInfra" runat="server" DataSourceID="odsRegionRepInfra" DataTextField="DesRegion"
                             DataValueField="CveRegion">
