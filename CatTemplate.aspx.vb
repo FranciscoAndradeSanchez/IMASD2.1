@@ -10,7 +10,8 @@ Partial Class CatTemplate
             Page.Response.Redirect("~/Catalogos.aspx")
         End If
         If (Not IsPostBack) Then
-            If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+            If (
+                (System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
                 Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
                     Case clsAuthentication.AuthorizationLevelList.Administering
                         Exit Select

@@ -15,7 +15,8 @@ Partial Class Cambiarcontra
             Else
                 Server.Transfer("Default.aspx")
             End If
-        ElseIf (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+        ElseIf (
+            (System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
             Me.mviwCambiarContra.SetActiveView(Me.viewAutenticaUsuar)
         Else
             Server.Transfer("Default.aspx")

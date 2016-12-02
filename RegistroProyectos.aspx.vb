@@ -1,4 +1,5 @@
 ﻿Imports System.Data
+Imports System.ServiceModel.Channels
 
 Partial Class RegistroProyectos2
     Inherits System.Web.UI.Page
@@ -73,7 +74,7 @@ Partial Class RegistroProyectos2
             If (ddlAnioProyectoBuscar.SelectedValue <> String.Empty) Then Anio = CInt(ddlAnioProyectoBuscar.SelectedValue) Else Anio = 0
             If (ddlInstitucionBuscar.SelectedValue <> String.Empty) Then CveInstitucion = CInt(ddlInstitucionBuscar.SelectedValue) Else CveInstitucion = 0
             If (ddlTipoProyectoFill.SelectedValue <> String.Empty) Then TipoProy = CInt(ddlTipoProyectoFill.SelectedValue) Else TipoProy = 0
-            Return taProyectos.CuentaTotalProyectosFiltrado(txtBusqueda.Text, ddlTipoApoyoBuscar.SelectedValue, Estatus, ddlRegionSegBuscar.SelectedValue, Anio, CveInstitucion, TipoProy)
+            Return taProyectos.CuentaTotalProyectosFiltrado(txtBusqueda.Text, ddlTipoApoyoBuscar.SelectedValue, Estatus, ddlRegionSegBuscar.SelectedValue, Anio, CveInstitucion)
         End Get
     End Property
 
@@ -591,7 +592,7 @@ Partial Class RegistroProyectos2
 
 #Region "Proyectos"
 
-    
+
 
     Protected Sub grdvProyectos_RowEditing(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewEditEventArgs) Handles grdvProyectos.RowEditing
         CurrentCveProyecto = grdvProyectos.DataKeys(e.NewEditIndex).Value
@@ -5829,4 +5830,15 @@ Partial Class RegistroProyectos2
 #End Region
 
 
+    Protected Sub grdvProyectos_Sorting(sender As Object, e As GridViewSortEventArgs)
+
+        ' Cancel the sorting operation if the user attempts
+
+    End Sub
+
+    Protected Sub grdvProyectos_Sorted(sender As Object, e As EventArgs)
+        ' Display the sort expression and sort direction.
+
+
+    End Sub
 End Class
