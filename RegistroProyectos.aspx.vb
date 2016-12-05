@@ -5833,12 +5833,12 @@ Partial Class RegistroProyectos2
     Protected Sub grdvProyectos_Sorting(sender As Object, e As GridViewSortEventArgs)
 
         ' Cancel the sorting operation if the user attempts
-       
+
     End Sub
 
     Protected Sub grdvProyectos_Sorted(sender As Object, e As EventArgs)
         ' Display the sort expression and sort direction.
-       
-      
+
+
     End Sub
 End Class
