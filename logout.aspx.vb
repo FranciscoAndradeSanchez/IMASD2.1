@@ -4,8 +4,7 @@ Partial Class logout
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         FormsAuthentication.SignOut()
-        '
-(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) = String.Empty
+        'session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) = String.Empty
         'Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNombre").ToString) = String.Empty
         'Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString) = String.Empty
         Session.Abandon()
