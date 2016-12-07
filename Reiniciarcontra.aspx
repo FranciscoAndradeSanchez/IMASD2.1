@@ -69,8 +69,9 @@
                 <td>
                     &nbsp;</td>
             </tr>
-        <tr><td>            Se ha enviado un correo electrónico a su buzón indicando el procedimiento a seguir
-            para reiniciar su contraseña.<br />
+        <tr><td> 
+            <asp:label id="lbmensage" runat="server" Text="Se ha enviado un correo electrónico a su buzón indicando el procedimiento a seguir
+            para reiniciar su contraseña." ></asp:label>           <br />
             <br />
                 Es importante que revise la bandeja de correo no deseado pues el remitente puede
                 no estar en su lista de contactos seguros.</td></tr>

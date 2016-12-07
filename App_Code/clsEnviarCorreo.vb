@@ -182,6 +182,7 @@ Public Class clsEnviarCorreo
     End Sub
 
     Public Sub EnviarCorreo()
+
         If strDestinatarios.Count = 0 Then
             Throw New Exception("No hay destinatarios a quien enviar el correo")
         End If
@@ -204,6 +205,8 @@ Public Class clsEnviarCorreo
         ConfigurarCredenciales()
         ConfigurarSMTP()
         smtpCliente.Send(mmCorreo)
+
+
     End Sub
 
     Public Sub EnivioAviso()
