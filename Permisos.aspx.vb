@@ -7,17 +7,23 @@ Partial Class Permisos
             If (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
                 Select Case CInt(Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoNivel").ToString))
                     Case clsAuthentication.AuthorizationLevelList.Administering
+                        btnver.Visible = True
                         Exit Select
                     Case clsAuthentication.AuthorizationLevelList.Financial
                         Server.Transfer("~/Inicio.aspx", False)
+                        btnver.Visible = False
                     Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
                         Server.Transfer("~/Inicio.aspx", False)
+                        btnver.Visible = False
                     Case clsAuthentication.AuthorizationLevelList.Consulting
                         Server.Transfer("~/Inicio.aspx", False)
+                        btnver.Visible = False
                     Case Else
                         Server.Transfer("~/Inicio.aspx", False)
+                        btnver.Visible = False
                 End Select
             End If
+            lbver.Text = 0
         End If
     End Sub
 
@@ -207,6 +213,14 @@ Partial Class Permisos
             db.OnClientClick = String.Format( _
                 "return confirm('¿Desea eliminar el usuario {0}?');", _
                 Usuario.CveUsuario.Replace("'", "\'"))
+        End If
+    End Sub
+
+    Protected Sub btnver_Click(sender As Object, e As ImageClickEventArgs)
+        If (lbver.Text = 1) Then
+            lbver.Text = 0
+        Else
+            lbver.Text = 1
         End If
     End Sub
 End Class

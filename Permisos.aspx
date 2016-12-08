@@ -1,15 +1,22 @@
-<%@ Page Language="VB" MasterPageFile="~/mpInterna.master" AutoEventWireup="false" CodeFile="Permisos.aspx.vb" Inherits="Permisos" title="AsignaciÛn de niveles de acceso" UICulture="es-MX" %>
+Ôªø<%@ Page Language="VB" MasterPageFile="~/mpInterna.master" AutoEventWireup="false" CodeFile="Permisos.aspx.vb" Inherits="Permisos" title="Asignaci√≥n de niveles de acceso" UICulture="es-MX" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cphPrincipalInterna" Runat="Server">
+ <asp:Label ID="lbver" runat="server" Visible="false"></asp:Label>
+ 
+
 <table width="800" align="center" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td>
     <table align="center" border="0" cellpadding="3" cellspacing="0" width="90%" class="tablaComun">
         <tr>
-            <th class="thtablaComun">&nbsp; AsignaciÛn de niveles de acceso</th>
+            <th class="thtablaComun">&nbsp; Asignaci√≥n de niveles de acceso</th>
+            <th> <asp:ImageButton ID="btnver" runat="server" ImageUrl="~/images/aplicacion/btnVerContase√±a.gif"  OnClick="btnver_Click" /></th>
+            
         </tr>
         <tr>
             <td>&nbsp;
                 <asp:TextBox ID="txtControl" runat="server" Enabled="False" Width="1px"></asp:TextBox>
+                </td>
+            <td>
                 <asp:CustomValidator ID="cuvAsignarNivel" runat="server" ForeColor=""></asp:CustomValidator></td>
         </tr>
         <tr>
@@ -19,13 +26,27 @@
                     <ItemTemplate>
                         <table border="0" cellpadding="3" cellspacing="0" class="tablaComun" width="100%">
                             <tr>
-                                <td style="width: 16%">
+                                <td style="width: 10%">
                                     <asp:ImageButton ID="ibtnEditarPUItm" runat="server" CommandName="Edit" ImageUrl="~/images/aplicacion/btnEditar.gif" /></td>
-                                <td style="width: 46%">
+                                <td style="width: 30%">
                                     <asp:LinkButton ID="lnkbUsuarioPUItm" runat="server" CommandName="Select" Text='<%# Eval("CveUsuario") %>'></asp:LinkButton></td>
-                                <td style="width: 22%">
-                                    <asp:Label ID="lblNivelPUItm" runat="server" Text='<%# Eval("DescripcionNivel") %>'></asp:Label></td>
-                                <td style="width: 16%">
+                                <td style="width: 20%">
+                                    <asp:Label ID="lblNivelPUItm" runat="server" Text='<%# Eval("DescripcionNivel")%>'></asp:Label></td>
+                                 <td style="width: 30%">
+                                    <%
+                                        If lbver.Text = "0" Then
+                                       %>
+                                            <asp:Label ID="lblpPasswordoculto"  Class="password" runat="server" Font-Bold="true" Font-Size="13.5" Text='*****************' > </asp:Label></td>
+                                       <% 
+                                    
+                                        Else
+                                       %>
+                                           <asp:Label ID="lblpPassword"  Class="password" runat="server" Text='<%# New clsSaltedHashing().Decrypt(Eval("Password"))%>' > </asp:Label></td>
+                                       <%  
+                                        End If
+                                    %>
+                                    
+                                <td style="width: 10%">
                                     <asp:ImageButton ID="ibtnEliminarPUItm" runat="server" CommandName="Delete" ImageUrl="~/images/aplicacion/btnEliminar.gif" /></td>
                             </tr>
                         </table>
@@ -34,13 +55,28 @@
                         <table border="0" cellpadding="3" cellspacing="0" class="tablaAlternatigTemplate"
                             width="100%">
                             <tr>
-                                <td style="width: 16%">
+                                <td style="width: 10%">
                                     <asp:ImageButton ID="ibtnEditarPUItm" runat="server" CommandName="Edit" ImageUrl="~/images/aplicacion/btnEditar.gif" /></td>
-                                <td style="width: 46%">
+                                <td style="width: 30%">
                                     <asp:LinkButton ID="lnkbUsuarioPUItm" runat="server" CommandName="Select" Text='<%# Eval("CveUsuario") %>'></asp:LinkButton></td>
-                                <td style="width: 22%">
+                                <td style="width: 20%">
                                     <asp:Label ID="lblNivelPUItm" runat="server" Text='<%# Eval("DescripcionNivel") %>'></asp:Label></td>
-                                <td style="width: 16%">
+                                <td style="width: 30%">
+                                     <%
+                                        If lbver.Text = "0" Then
+                                       %>
+                                            <asp:Label ID="lblpPasswordoculto"  Class="password"  Font-Bold="true" Font-Size="13.5" runat="server" Text='*****************' > </asp:Label></td>
+                                       <% 
+                                    
+                                        Else
+                                       %>
+                                           <asp:Label ID="lblpPassword"  Class="password" runat="server" Text='<%# New clsSaltedHashing().Decrypt(Eval("Password"))%>' > </asp:Label></td>
+                                       <%  
+                                        End If
+                                    %>
+                                      
+                                </td>
+                                <td style="width: 10%">
                                     <asp:ImageButton ID="ibtnEliminarPUItm" runat="server" CommandName="Delete" ImageUrl="~/images/aplicacion/btnEliminar.gif" /></td>
                             </tr>
                         </table>
@@ -63,13 +99,13 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    InstituciÛn</td>
+                                    Instituci√≥n</td>
                                 <td style="width: 70%">
                                     <asp:Label ID="lblInstitucionPUEdt" runat="server" Text='<%# Eval("Institucion") %>'></asp:Label></td>
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    Correo electrÛnico</td>
+                                    Correo electr√≥nico</td>
                                 <td style="width: 70%">
                                     <asp:Label ID="lblEmailPUEdt" runat="server" Text='<%# Eval("Email") %>'></asp:Label></td>
                             </tr>
@@ -107,15 +143,17 @@
                         </table>
                     </EditItemTemplate>
                     <HeaderTemplate>
-                        <table border="0" cellpadding="3" cellspacing="0" class="tablaHeaderTemplate" width="100%">
+                        <table border="0" cellpadding="0" cellspacing="0" class="tablaHeaderTemplate" width="100%">
                             <tr>
-                                <th style="width: 16%">
+                                <th style="width: 10%">
                                     &nbsp;</th>
-                                <th style="width: 46%">
+                                <th style="width: 35%">
                                     Usuario</th>
-                                <th style="width: 22%">
+                                <th style="width: 25%">
                                     Nivel</th>
-                                <th style="width: 16%">
+                                 <th style="width: 20%">
+                                    Password</th>
+                                <th style="width: 10%">
                                     &nbsp;</th>
                             </tr>
                         </table>
@@ -144,7 +182,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    InstituciÛn</td>
+                                    Instituci√≥n</td>
                                 <td style="width: 70%">
                                     <asp:Label ID="lblInstitucionPUSel" runat="server" Text='<%# Eval("Institucion") %>'></asp:Label></td>
                             </tr>
@@ -156,7 +194,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    OcupaciÛn</td>
+                                    Ocupaci√≥n</td>
                                 <td style="width: 70%">
                                     <asp:Label ID="lblOcupacionPUSel" runat="server" Text='<%# Eval("Ocupacion") %>'></asp:Label></td>
                             </tr>
@@ -168,7 +206,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    Correo electrÛnico</td>
+                                    Correo electr√≥nico</td>
                                 <td style="width: 70%">
                                     <asp:Label ID="lblEmailPUSel" runat="server" Text='<%# Eval("Email") %>'></asp:Label></td>
                             </tr>
@@ -186,7 +224,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 30%">
-                                    Uso que le dar· a la informaciÛn</td>
+                                    Uso que le dar√° a la informaci√≥n</td>
                                 <td style="width: 70%">
                                     <asp:Label ID="lblUsoInformacionPUSel" runat="server" Text='<%# Eval("UsoInformacion") %>'></asp:Label></td>
                             </tr>
