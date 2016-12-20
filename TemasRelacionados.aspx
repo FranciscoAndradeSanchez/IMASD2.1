@@ -178,17 +178,17 @@
                                         <table cellpadding="3" cellspacing="0" class="tablaComun" width="90%" align="right" border="0">
                                             <tr>
                                                 <td colspan="2" class="thtablaComun">Datos Generales</td>
-                                            </tr>
+                                            </tr> 
                                             <tr>
                                                 <td style="width:20%">
-                                                    id_tema:
+                                                    id tema:
                                                 </td>
                                                 <td style="width:80%" align="left">
-                                                    <asp:Label ID="id_temaLabelgvp" runat="server" Text='<%# Eval("id_tema")%>' />
+                                                    <asp:LinkButton ID="id_temaLabelgvp" runat="server"  CommandName="Select" Text='<%# Eval("id_tema")%>' ></asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Nombre_Proyectos:                     
+                                                <td>Nombre Proyectos:                     
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="Nombre_ProyectoLabelgvp" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
@@ -208,13 +208,14 @@
                                                     <asp:Label ID="TituloLabelgvp" runat="server" Text='<%# Bind("Titulo") %>' />
                                                 </td>
                                             </tr>
-                                           <%-- <tr>
+                                            <tr>
                                                 <td>link:                   
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="linkLabelgvp" runat="server" Visible="false" Text='<%# Bind("link") %>' />
+                                                    <a href="<%# String.Format(Bind("link"), Bind("link"))%>" target="_blank" > <asp:Label Text='<%# Bind("link")%>' runat="server" ID="linklabel2"> </asp:Label> </a>
+
                                                 </td>
-                                            </tr>--%>
+                                            </tr>
                                             <tr>
                                                 <td>
                                                     <asp:TextBox ID="txtValgvp" runat="server" MaxLength="1" ReadOnly="True" Width="1px"></asp:TextBox>
@@ -271,18 +272,137 @@
                                                     <asp:TextBox ID="TituloEdit" runat="server" Text='<%# Bind("Titulo") %>' />
                                                 </td>
                                             </tr>
-                                            <%--<tr>
+                                            <tr>
                                                 <td>link:                       
                                                 </td>
                                                 <td>
-                                                    <asp:TextBox ID="linkEdit" runat="server" Visible="false" Text='<%# Bind("link") %>' />
+                                                    <asp:TextBox ID="linkEdit" runat="server" Visible="true" Text='<%# Bind("link") %>' />
                                                 </td>
-                                            </tr>--%>
+                                            </tr>
                                             <tr>
                                                 <td></td>
                                                 <td>
                                                     <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar" />
                                                     &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <asp:MultiView ID="mviewProyectosEdt" runat="server" ActiveViewIndex="0">
+                                                            <asp:View ID="viewAdministrativoEdt" runat="server">
+                                                                <asp:HiddenField ID="hdCveProyectoAdmEdt" Value='<%# Eval("id_tema")%>' runat="server" />
+                                                                <table align="center" border="0" cellpadding="0" cellspacing="0" width="90%">
+                                                                    <tr>
+                                                                        <td colspan="2">&nbsp;
+            		                                        
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="thtablaComun" colspan="2" style="height: 19px">Esquema de pagos</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <asp:ImageButton ID="ibtnNuevoPG" runat="server" ImageUrl="~/images/aplicacion/btnNuevo.gif" OnClick="ibtnNuevoPG_Click" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2">
+                                                                            <%--Entra el Polo--%>
+                                                                            <asp:Panel ID="pnlProgramaPagoPPAdd" runat="server" Width="100%" Visible="False">
+                                                                                <table width="100%" border="0" cellpadding="3" cellspacing="0" class="tablaEditarTemplate">   
+                                                                                    <tr>
+                                                                                        <td style="width: 30%">Título</td>
+                                                                                        <td style="width: 70%">
+                                                                                            <asp:TextBox ID="txtTituloAdd" runat="server" EnableViewState="false" Columns="60"></asp:TextBox>
+                                                                                            <asp:RequiredFieldValidator runat="server" Display="Dynamic" ID="rfvTituloAdd" ControlToValidate="txtTituloAdd" ErrorMessage="Título es un campo obligatorio" />
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width: 30%">Documento</td>
+                                                                                        <td style="width: 70%">
+                                                                                            <asp:FileUpload ID="flupPagosAdd" runat="server" EnableViewState="false" /><br />
+                                                                                            <asp:RequiredFieldValidator runat="server" Display="dynamic" ID="rfvflupPagosAdd" ControlToValidate="flupPagosAdd" ErrorMessage="El documento es obligatorio" />
+                                                                                            <asp:RegularExpressionValidator runat="server" Display="dynamic" ID="revflupPagosAdd" ControlToValidate="flupPagosAdd" ErrorMessage="El nombre del archivo tiene espacios o caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü\x22\#\$%\x26'()*\+,\-.?¡:;_\\\d\n]{0,}$" />
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width: 30%"></td>
+                                                                                        <td style="width: 70%">
+                                                                                            <asp:ImageButton ID="ibtnGuardarPGAdd" runat="server" ImageUrl="~/images/aplicacion/btnGuardar.gif" OnClick="ibtnGuardarPGAdd_Click" />
+                                                                                            <asp:ImageButton ID="ibtnAdministrativoCancelar" runat="server" ImageUrl="~/images/aplicacion/btnCancelar.gif" CausesValidation="false" OnClick="ibtnAdministrativoCancelar_Click" />
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </asp:Panel>
+                                                                            <asp:DataList ID="dtlProyectoProgPagoPG" runat="server" DataKeyField="id_tema" DataSourceID="odsTemasProyector"      
+                                                                                OnCancelCommand="dtlProyectoProgPagoPG_CancelCommand"
+                                                                                OnSelectedIndexChanged="dtlProyectoProgPagoPG_SelectedIndexChanged"
+                                                                                OnEditCommand="dtlProyectoProgPagoPG_EditCommand"        
+                                                                                Width="100%">
+                                                                                <HeaderTemplate>
+                                                                                    <table border="0" cellpadding="3" cellspacing="0" class="tablaHeaderTemplate" width="100%">
+                                                                                        <tr>
+                                                                                            <th style="width: 16%">&nbsp;
+                                                                                            </th>
+                                                                                            <th style="width: 34%">Documento</th>
+                                                                                          
+                                                                                            <th style="width: 16%">&nbsp;
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </HeaderTemplate>
+                                                                                <ItemTemplate>
+                                                                                    <table border="0" cellpadding="3" cellspacing="0" class="tablaComun" width="100%">
+                                                                                        <tr>
+                                                                                            <td style="width: 16%">
+                                                                                              <%--  <asp:ImageButton ID="ibtnEditarPGItm" runat="server" CommandName="Edit" ImageUrl="~/images/aplicacion/btnEditar.gif" CausesValidation="false" />--%></td>
+                                                                                            <td style="width: 34%">&nbsp;
+                                                                        <asp:LinkButton ID="lnkbAdminPago" runat="server" CommandArgument='<%# Eval("Ruta")%>' Text='<%# Eval("Titulo") %>' CommandName="Bajalo"></asp:LinkButton>
+                                                                                            </td>
+                                                                                            <td style="width: 16%">
+                                                                                               <%-- <asp:ImageButton ID="ibtnEliminarPGItm" runat="server" CommandName="Delete" ImageUrl="~/images/aplicacion/btnEliminar.gif" CausesValidation="false" />--%>
+                                                                                                <asp:CustomValidator ID="cuvPGILista" runat="server" ForeColor="">x</asp:CustomValidator>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </ItemTemplate>
+                                                                                <EditItemTemplate>
+                                                                                    <table width="100%" border="0" cellpadding="3" cellspacing="0" class="tablaEditarTemplate">
+                                                                                        <tr>
+                                                                                            <td style="width: 30%">Título</td>
+                                                                                            <td style="width: 70%">
+                                                                                                <asp:TextBox ID="txtTitulo" runat="server" Text='<%# Eval("Titulo") %>' Columns="60"></asp:TextBox>
+                                                                                                <asp:RequiredFieldValidator runat="server" Display="Dynamic" ID="rfvTituloEdt" ControlToValidate="txtTitulo" ErrorMessage="Título es un campo obligatorio" />
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="width: 30%">Documento</td>
+                                                                                            <td style="width: 70%">
+                                                                                                <asp:Label ID="lblUbicacion" runat="server" Text='<%# Eval("Ruta")%>'></asp:Label></td>
+                                                                                        </tr>
+                                                                                        
+                                                                                    </table>
+                                                                                </EditItemTemplate>
+                                                                                <AlternatingItemStyle CssClass="tablaAlternatigTemplate" />
+                                                                            </asp:DataList>
+                                                                            <asp:ObjectDataSource ID="odsTemasProyector" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetCatProductosTR" TypeName="dsAppTableAdapters.Temas_Relacionados_ProductosTableAdapter" InsertMethod="Insert">
+                                                                                <InsertParameters>
+                                                                                    <asp:Parameter Name="id_tema" Type="Int32"></asp:Parameter>
+                                                                                    <asp:Parameter Name="Titulo" Type="String"></asp:Parameter>
+                                                                                    <asp:Parameter Name="Fecha" Type="DateTime"></asp:Parameter>
+                                                                                    <asp:Parameter Name="Ruta" Type="String"></asp:Parameter>
+                                                                                </InsertParameters>
+                                                                                <SelectParameters>
+                                                                                    <asp:ControlParameter ControlID="hdCveProyectoAdmEdt" Name="id_tema" PropertyName="Value" Type="Int32" />
+                                                                                </SelectParameters>
+                                                                            </asp:ObjectDataSource>
+                                                                            <%--Sale el Polo--%>                                    
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </asp:View>
+                                                       </asp:MultiView>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -327,7 +447,7 @@
 
         <asp:View ID="viewDetalle" runat="server">
             <asp:HiddenField ID="hdCveProyecto_Detalle" runat="server" Value="" />
-            <asp:ObjectDataSource ID="odsTemasRelacionados" runat="server" DeleteMethod="Delete" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetTemasRelacionados_Detalle" TypeName="dsAppTableAdapters.Temas_RelacionadosTableAdapter" UpdateMethod="Update">
+            <asp:ObjectDataSource ID="odsTemasRelacionados" runat="server" DeleteMethod="Delete" InsertMethod="Insert" OldValuesParameterFormatString="original_{0}" SelectMethod="GetTemaselacionadosByClaveCat" TypeName="dsAppTableAdapters.Temas_RelacionadosTableAdapter" UpdateMethod="Update">
                 <DeleteParameters>
                     <asp:Parameter Name="Original_id_tema" Type="Int32" />
                 </DeleteParameters>
@@ -338,7 +458,7 @@
                     <asp:Parameter Name="link" Type="String" />
                 </InsertParameters>
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="txtBusqueda" Name="filtro" PropertyName="Text" Type="String" DefaultValue=" " />
+                    <asp:ControlParameter ControlID="hdCveProyecto_Detalle" Name="id_tema" PropertyName="Value" Type="Int32" />
                 </SelectParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="Nombre_Proyecto" Type="String" />
@@ -351,11 +471,11 @@
 
 
             <asp:FormView ID="frmvProyecto_Detalle" runat="server"
-                DataSourceID="odsTemasRelacionados" DataKeyNames="id_tema">
+                DataSourceID="odsTemasRelacionados" Width="100%" DataKeyNames="id_tema">
                 <EditItemTemplate>
-                    <table cellpadding="3" cellspacing="0" class="tablaComun" width="90%" align="center" border="0">
+                    <table cellpadding="3" cellspacing="0" class="tablaComun" width="100%" align="center" border="0">
                         <tr>
-                            <td colspan="2" class="thtablaComun">Datos Generales</td>
+                            <td colspan="3" class="thtablaComun">Datos Generales</td>
                         </tr>
                         <tr>
                             <td style="width: 30%">Identificador del tema:</td>
@@ -364,7 +484,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 30%">Nombre_Proyecto:
+                            <td style="width: 30%">Nombre Proyecto:
                             </td>
                             <td style="width: 70%">
                                 <asp:TextBox ID="Nombre_ProyectoTextBox" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
@@ -384,13 +504,14 @@
                                 <asp:TextBox ID="TituloTextBox" runat="server" Text='<%# Bind("Titulo") %>' />
                             </td>
                         </tr>
-                       <%-- <tr>
+                        <tr>
                             <td>link:                       
                             </td>
                             <td>
-                                <asp:TextBox ID="linkTextBox" runat="server" Visible="false" Text='<%# Bind("link") %>' />
+                                <asp:TextBox ID="linkTextBox" runat="server" Text='<%# Bind("link") %>' />
                             </td>
-                        </tr>--%>
+                        </tr>
+                          
                         <tr>
                             <td></td>
                             <td>
@@ -408,7 +529,7 @@
                             <td colspan="2" class="thtablaComun">Datos Generales</td>
                         </tr>
                         <tr>
-                            <td style="width: 30%">Nombre_Proyecto:
+                            <td style="width: 30%">Nombre Proyecto:
                             </td>
                             <td style="width: 70%">
                                 <asp:TextBox ID="Nombre_ProyectoTextBox" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
@@ -428,13 +549,13 @@
                                 <asp:TextBox ID="TituloTextBox" runat="server" Text='<%# Bind("Titulo") %>' />
                             </td>
                         </tr>
-                        <%--<tr>
+                        <tr>
                             <td style="width: 30%">link:
                             </td>
                             <td style="width: 70%">
-                                <asp:TextBox ID="linkTextBox" runat="server" Visible="false" Text='<%# Bind("link") %>' />
+                                <asp:TextBox ID="linkTextBox" runat="server"  Text='<%# Bind("link") %>' />
                             </td>
-                        </tr>--%>
+                        </tr>
                         <tr>
                             <td>
                                 <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" />
@@ -445,17 +566,17 @@
                 <ItemTemplate>
                     <table cellpadding="3" cellspacing="0" class="tablaComun" width="90%" align="center" border="0">
                         <tr>
-                            <td colspan="2" class="thtablaComun">Datos Generales</td>
+                            <td colspan="3" class="thtablaComun">Datos Generales</td>
                         </tr>
                         <tr>
-                            <td>id_tema:
+                            <td style="width:15%">id tema:
                             </td>
-                            <td>
+                            <td style="width:85%">
                                 <asp:Label ID="id_temaLabel" runat="server" Text='<%# Eval("id_tema") %>' />
                             </td>
                         </tr>
                         <tr>
-                            <td>Nombre_Proyectos:                    
+                            <td>Nombre Proyectos:                    
                             </td>
                             <td>
                                 <asp:Label ID="Nombre_ProyectoLabel" runat="server" Text='<%# Bind("Nombre_Proyecto") %>' />
@@ -475,20 +596,91 @@
                                 <asp:Label ID="TituloLabel" runat="server" Text='<%# Bind("Titulo") %>' />
                             </td>
                         </tr>
-                        <%--<tr>
+                        <tr>
                             <td>link:                   
                             </td>
-                            <td>
-                                <asp:Label ID="linkLabel" runat="server" Text='<%# Bind("link") %>' />
+                            <td>                                 
+                               <a href="<%# String.Format(Eval("link"), Eval("link"))%>" target="_blank" > <asp:Label Text='<%# Eval("link")%>' runat="server" ID="linklabel"> </asp:Label> </a>
+
                             </td>
-                        </tr>--%>
+                        </tr>
+                            <tr>
+                    <td >  
+                        <asp:DataList ID="dtlProductosST" runat="server" DataKeyField="id_tema"
+                            DataSourceID="odsProductosST" Width="100%" 
+                            OnItemCommand="dtlProductosST_ItemCommand" 
+                             OnItemDataBound="dtlProductosST_ItemDataBound" >
+                            <ItemStyle CssClass="tablaItemTemplate" />
+                            <AlternatingItemStyle CssClass="tablaAlternatigTemplate" />
+                            <HeaderTemplate>
+                                <table width="100%" border="0" cellpadding="3" cellspacing="0" align="center">
+                                    <tr>
+                                        <th style="width: 50%">
+                                            Producto</th>
+                                        <th style="width: 50%">
+                                            Título</th>
+                                    </tr>
+                                </table>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <table id="qoLVC" width="100%" border="0" cellpadding="3" cellspacing="0"  align="center">
+                                    <tr>
+                                        <td width="50%">
+                                            <asp:Label ID="lblProductoItm" runat="server" Text='<%# Eval("Id_tema")%>'></asp:Label></td>
+                                        <td width="50%">
+                                            <asp:LinkButton ID="lnkbTituloItm" runat="server" CommandArgument='<%# Eval("id_tema") & "|" & Eval("Fecha") & "|" & Eval("Titulo") & "|0"%>'
+                                                Text='<%# Eval("Titulo") %>' CommandName="Download"></asp:LinkButton></td>
+                                    </tr>
+                                </table>
+                                <asp:ImageButton ID="imgbArch0" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch1" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch2" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch3" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch4" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch5" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch6" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch7" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch8" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch9" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch10" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch11" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch12" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch13" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch14" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch15" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch16" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch17" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch18" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch19" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch20" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch21" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch22" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch23" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                                <asp:ImageButton ID="imgbArch24" runat="server" ImageUrl="~/images/aplicacion/pdf.gif" CausesValidation="false" ToolTip="documento #1" Visible="false" CommandName="Download" ImageAlign="Left" />
+                            </ItemTemplate>
+                        </asp:DataList> 
+                        <asp:ObjectDataSource ID="odsProductosST" runat="server" OldValuesParameterFormatString="original_{0}"
+                            SelectMethod="GetCatProductosTR" TypeName="dsAppTableAdapters.Temas_Relacionados_ProductosTableAdapter" InsertMethod="Insert">
+                            <InsertParameters> 
+                                <asp:Parameter Name="id_tema" Type="Int32"></asp:Parameter>
+                                <asp:Parameter Name="Titulo" Type="String"></asp:Parameter>
+                                <asp:Parameter Name="Fecha" Type="DateTime"></asp:Parameter>
+                                <asp:Parameter Name="Ruta" Type="String"></asp:Parameter>
+                            </InsertParameters>
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="id_temaLabel" Name="id_tema" PropertyName="Text"
+                                    Type="Int32" />
+                            </SelectParameters>
+                        </asp:ObjectDataSource>
+                    </td>
+                </tr>
                         <tr>
                             <td>
                                 <asp:TextBox ID="txtVal" runat="server" MaxLength="1" ReadOnly="True" Width="1px"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:ImageButton runat="server" ImageUrl="~/images/aplicacion/btnEditar.gif" CommandArgument='<%# Eval("id_tema")%>' CommandName="Edit" />
-                                <asp:ImageButton runat="server" ImageUrl="~/images/aplicacion/btnEliminar.gif" CommandName="Delete" CommandArgument='<%# Eval("id_tema") %>' />
+                                <%--<asp:ImageButton runat="server" ImageUrl="~/images/aplicacion/btnEditar.gif" CommandArgument='<%# Eval("id_tema")%>' CommandName="Edit" />--%>
+                                <%--<asp:ImageButton runat="server" ImageUrl="~/images/aplicacion/btnEliminar.gif" CommandName="Delete" CommandArgument='<%# Eval("id_tema") %>' />--%>
                             </td>
                         </tr>
 
@@ -556,12 +748,12 @@
                                             ForeColor="" ToolTip="Titulo del tema relacionado tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator>
                                 </td>
                             </tr>
-                            <%--<tr>
+                            <tr>
                                 <td style="width: 30%">Link del Proyecto</td>
                                 <td style="width: 70%">
                                     <asp:TextBox ID="txtlinkAdd" runat="server" MaxLength="300" Rows="4" TextMode="MultiLine" Width="400px"></asp:TextBox>
                                 </td>
-                            </tr>--%>
+                            </tr>
                             <tr>
                                 <td colspan="2"></td>
                             </tr>
@@ -587,5 +779,6 @@
             </table>
         </asp:View>
     </asp:MultiView>
+   
 </asp:Content>
 

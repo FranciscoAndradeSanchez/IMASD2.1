@@ -22,9 +22,9 @@ Partial Class mpInterna
                         Me.mnuAplicacion.Items.Add(New MenuItem("Usuarios", "Usuarios", String.Empty, "javascript:;", "_self"))
                         Me.mnuAplicacion.Items(3).ChildItems.Add(New MenuItem("Cambiar contraseña", "Cambiar contraseña", String.Empty, "~/Cambiarcontra.aspx", "_self"))
                         Me.mnuAplicacion.Items(3).ChildItems.Add(New MenuItem("Modificar permisos", "Modificar permisos", String.Empty, "~/Permisos.aspx", "_self"))
-                        Me.mnuAplicacion.Items.Add(New MenuItem("Temas Relacionados", "Temas Relacionados", String.Empty, "~/TemasRelacionados.aspx", "_blank"))
-                        Me.mnuAplicacion.Items.Add(New MenuItem("Aviso de Privacidad", "Aviso de Privacidad", String.Empty, "~/privacidad.aspx", "_blank"))
-                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda2.aspx", "_blank"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Temas Relacionados", "Temas Relacionados", String.Empty, "~/TemasRelacionados.aspx", "_self"))
+                        'Me.mnuAplicacion.Items.Add(New MenuItem("Aviso de Privacidad", "Aviso de Privacidad", String.Empty, "~/privacidad.aspx", "_blank"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda2.aspx", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Cerrar sesión", "Cerrar sesión", String.Empty, "~/logout.aspx", "_self"))
 
 
@@ -34,27 +34,30 @@ Partial Class mpInterna
                         'Me.mnuAplicacion.Items.Add(New MenuItem("Catálogos", "Catálogos", String.Empty, "~/Catalogos.aspx", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Usuarios", "Usuarios", String.Empty, "~/#", "_self"))
                         Me.mnuAplicacion.Items(1).ChildItems.Add(New MenuItem("Cambiar contraseña", "Cambiar contraseña", String.Empty, "~/Cambiarcontra.aspx", "_self"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Temas Relacionados", "Temas Relacionados", String.Empty, "~/TemasRelacionados.aspx", "_self"))
                         'Me.mnuAplicacion.Items(2).ChildItems.Add(New MenuItem("Modificar permisos", "Modificar permisos", String.Empty, "~/#", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Cerrar sesión", "Cerrar sesión", String.Empty, "~/logout.aspx", "_self"))
-                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda/ayuda.aspx", "_blank"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda/ayuda.aspx", "_self"))
                         Me.idpnlEncabezado.Visible = False
                     Case clsAuthentication.AuthorizationLevelList.LimitedUpdating
                         Me.mnuAplicacion.Items.Add(New MenuItem("Proyectos", "Proyectos", String.Empty, "~/RegistroProyectos.aspx", "_self"))
                         'Me.mnuAplicacion.Items.Add(New MenuItem("Catálogos", "Catálogos", String.Empty, "javascript:;", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Usuarios", "Usuarios", String.Empty, "javascript:;", "_self"))
                         Me.mnuAplicacion.Items(1).ChildItems.Add(New MenuItem("Cambiar contraseña", "Cambiar contraseña", String.Empty, "~/Cambiarcontra.aspx", "_self"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Temas Relacionados", "Temas Relacionados", String.Empty, "~/TemasRelacionados.aspx", "_self"))
                         'Me.mnuAplicacion.Items(2).ChildItems.Add(New MenuItem("Modificar permisos", "Modificar permisos", String.Empty, "javascript:;", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Cerrar sesión", "Cerrar sesión", String.Empty, "~/logout.aspx", "_self"))
-                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda/ayuda.aspx", "_blank"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda/ayuda.aspx", "_self_self"))
                         Me.idpnlEncabezado.Visible = False
                     Case clsAuthentication.AuthorizationLevelList.Consulting
                         Me.mnuAplicacion.Items.Add(New MenuItem("Proyectos", "Proyectos", String.Empty, "~/RegistroProyectos.aspx", "_self"))
                         'Me.mnuAplicacion.Items.Add(New MenuItem("Catálogos", "Catálogos", String.Empty, "javascript:;", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Usuarios", "Usuarios", String.Empty, "javascript:;", "_self"))
                         Me.mnuAplicacion.Items(1).ChildItems.Add(New MenuItem("Cambiar contraseña", "Cambiar contraseña", String.Empty, "Cambiarcontra.aspx", "_self"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Temas Relacionados", "Temas Relacionados", String.Empty, "~/TemasRelacionados.aspx", "_self"))
                         'Me.mnuAplicacion.Items(2).ChildItems.Add(New MenuItem("Modificar permisos", "Modificar permisos", String.Empty, "~/#", "_self"))
                         Me.mnuAplicacion.Items.Add(New MenuItem("Cerrar sesión", "Cerrar sesión", String.Empty, "~/logout.aspx", "_self"))
-                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda/ayuda.aspx", "_blank"))
+                        Me.mnuAplicacion.Items.Add(New MenuItem("Ayuda", "Ayuda", String.Empty, "~/ayuda/ayuda.aspx", "_self"))
                         Me.idpnlEncabezado.Visible = True
                     Case Else
                         Me.mnuAplicacion.Visible = False

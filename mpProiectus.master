@@ -55,24 +55,24 @@
    <div id="slide-holder">
 <div id="slide-runner">
             
-            <a href=""><img id='slide-img-1' src='images/Banner%20de%20manuales.jpg' width="1200"; height="400" class="slide" alt="" /></a>
+            <a href=""><img id='slide-img-1' src='images/Banner%20de%20manuales.jpg' width="80%"; height="100%" class="slide" alt="" /></a>
                 
-            <a href=""><img id='slide-img-2' src='images/Banners%20pantallas-02.jpg' width="1200"; height="400" class="slide" alt="" /></a>
+            <a href=""><img id='slide-img-2' src='images/Banners%20pantallas-02.jpg' width="80%"; height="100%" class="slide" alt="" /></a>
                 
-            <a href=""><img id='slide-img-3' src='images/Banners%20pantallas-19.jpg' width="1200"; height="400"  class="slide" alt="" /></a>
+            <a href=""><img id='slide-img-3' src='images/Banners%20pantallas-19.jpg' width="80%"; height="100%"  class="slide" alt="" /></a>
                 
-            <a href=""><img id='slide-img-4' src='images/Banners%20pantallas-21.jpg' width="1200"; height="400" class="slide" alt="" /></a>
+            <a href=""><img id='slide-img-4' src='images/Banners%20pantallas-21.jpg' width="80%"; height="100%" class="slide" alt="" /></a>
                 
-            <a href=""><img id='slide-img-5' src='images/IMAGEN%20I%20(2).JPG' width="1200"; height="400" class="slide" alt="" /></a>
+            <a href=""><img id='slide-img-5' src='images/IMAGEN%20I%20(2).JPG' width="80%"; height="100%" class="slide" alt="" /></a>
                 
-            <a href=""><img id='slide-img-6' src='images/Imagen%20I.JPG' width="1200"; height="400"  class="slide" alt="" /></a>
+            <a href=""><img id='slide-img-6' src='images/Colocar-Banners%20pantallas-12.jpg' width="80%"; height="100%"  class="slide" alt="" /></a>
 
-            <a href=""><img id='slide-img-7' src='images/Imagen%20II.JPG' width="1200"; height="400" class="slide" alt="" /></a>
-             
+            <a href=""><img id='slide-img-7' src='images/Colocar-Banners%20pantallas-22.jpg' width="80%"; height="100%" class="slide" alt="" /></a>
+    
     
     <div id="slide-controls">
-     <p id="slide-client" class="text"><strong>post: </strong><span></span></p>
-     <p id="slide-desc" class="text"></p>
+     <%--<p id="slide-client" class="text"><strong>post: </strong><span></span></p>
+     <p id="slide-desc" class="text"></p>--%>
      <p id="slide-nav"></p>
     </div>
 </div>
@@ -83,13 +83,13 @@
        <script type="text/javascript">
            if (!window.slider) var slider = {};
            slider.data = [
-                       { "id": "slide-img-1", "client": "nature beauty", "desc": "nature beauty photography" },
-                       { "id": "slide-img-2", "client": "blue river", "desc": "fotografía bosque río azul" },
-                       { "id": "slide-img-3", "client": "nature beauty", "desc": "fotografía rayo de luz" },
-                       { "id": "slide-img-4", "client": "nature beauty", "desc": "fotografía paisaje maravilloso" },
-                       { "id": "slide-img-5", "client": "nature beauty", "desc": "fotografía tarde nublada" },
-                       { "id": "slide-img-6", "client": "montaña", "desc": "fotografía paisaje verde" },
-                       { "id": "slide-img-7", "client": "catarata", "desc": "fotografía expectacular" }];
+                       { "id": "slide-img-1", "client": "nature beauty" },
+                       { "id": "slide-img-2", "client": "blue river" },
+                       { "id": "slide-img-3", "client": "nature beauty" },
+                       { "id": "slide-img-4", "client": "nature beauty" },
+                       { "id": "slide-img-5", "client": "nature beauty" },
+                       { "id": "slide-img-6", "client": "montaña" },
+                       { "id": "slide-img-7", "client": "catarata" }];
         </script>  
       
   </div></div><!--/header-->
@@ -108,12 +108,11 @@
                                         <span  class="contactanos"><a href="Contactanos.aspx"><strong style="color:black;">Para envío de comentarios y sugerencias en general hacer clic en Contáctanos</strong> <img src="images/2014/contacto.png" alt="Contacto" /></a></span>
                                     </p>
                                     <br />
-                                    <ul class="listado3"  >                                          
+                                    <ul class="listado3">                                          
                                                                                                               
-                                           <li ><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/twiter.png" width="30" height="30" alt=""  /></a></li>
-                                           <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/facebook.jpg"  width="30" height="30" alt=""/></a></li>
-                                           <li ><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/watts.jpg"  width="30" height="30" alt="" /></a></li>      
-                                           <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/hotmail.png"  width="30" height="30" alt=""/></a></li>  
+                                           <li><a href="https://twitter.com/Conafor" target="_blank"><img src="imagenes/twiter.png" width="30" height="30" alt=""></a></li>
+                                           <li><a href="https://www.facebook.com/CONAFOR.Central" target="_blank"><img src="imagenes/facebook.jpg" width="30" height="30" alt=""></a></li> 
+                                           <li><a href="https://www.youtube.com/channel/UCoWWO_lK5arImCwY6GbaeeQ?rel=0&amp;autoplay=1" target="_blank"><img src="images/2014/YOUTUBE.jpg" width="30" height="30" alt="CANAL CONAFOR"></a></li> 
                                     </ul>
                                     <br />
                                     <br />
@@ -124,14 +123,18 @@
                                     </small>
                                 </div>
                            
-                                <div class="enlaces" style="top: 0px; left: 0px;">
+                                
+                            <div class="enlaces" style="top: 0px; left: 0px;">
+                                      <p style="text-align:center; margin-top=0%; margin-bottom=0;">
+                                        <span class="videos-link"><strong style="color:white;">Sitios Relacionados</strong> </span>
+                                      </p>
 		              	            <ul>      
-                                                        <li ><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/redes.jpg" width="30%" height="80" alt=""  /></a></li>
-                                                        <li ><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/CEVMF.jpeg"  width="30%" height="80" alt=""/></a></li>
-                                                        <li ><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/revista.jpg"  width="30%" height="80" alt="" /></a></li>                           
-                                   
+                                                        <li><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/redes.jpg" width="25%" height="50" alt=""></a></li>
+                                                        <li><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/CEVMF.jpeg" width="25%" height="50" alt=""></a></li>
+                                                        <li><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/revista.jpg" width="25%" height="50" alt=""></a></li>                           
+                                                       
                                     </ul>
-		                        </div>
+		                    </div>
                            
                      </div><!-- /row-pie-->
                 </div><!-- /row-->

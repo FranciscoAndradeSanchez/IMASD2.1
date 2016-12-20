@@ -490,7 +490,7 @@ Partial Class TemasRelacionados
             'If txtlinkAdd.Text = String.Empty Then
             '    txtlinkAdd.Text = "N/A"
             'End If
-            taTemas.spTemasRelacionados_Insert(txtNombreAdd.Text, ddlInstitucionAdd.SelectedValue, txtTituloAdd.Text, "")
+            taTemas.spTemasRelacionados_Insert(txtNombreAdd.Text, ddlInstitucionAdd.SelectedValue, txtTituloAdd.Text, txtlinkAdd.Text)
 
             lblEstatusAdd.Text = "Proyecto ' " & txtCveTemasBuscar.Text & " ' insertado con éxito"
             lblEstatusAdd.Visible = True
@@ -576,12 +576,14 @@ Partial Class TemasRelacionados
         pnlBusqueda.Visible = False
         pnlNavegacionUp.Visible = True
         pnlNavegacionDw.Visible = False
+        SelPestaniaProgramaPago()
     End Sub
+    'alberto
     Protected Sub frmvProyecto_Detalle_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles frmvProyecto_Detalle.DataBound
-        CType(frmvProyecto_Detalle.FindControl("lblCveProyectoST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblCveProyectoST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
-        CType(frmvProyecto_Detalle.FindControl("lblNombreProyectoST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblNombreProyectoST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
-        CType(frmvProyecto_Detalle.FindControl("lbInstitucion"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbInstitucion"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
-        CType(frmvProyecto_Detalle.FindControl("lbTitulo"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbTitulo"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("id_temaLabel1"), Label).Text = CType(frmvProyecto_Detalle.FindControl("id_temaLabel1"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("Nombre_ProyectoTextBox"), Label).Text = CType(frmvProyecto_Detalle.FindControl("Nombre_ProyectoTextBox"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("InstitucionTextBox"), Label).Text = CType(frmvProyecto_Detalle.FindControl("InstitucionTextBox"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'CType(frmvProyecto_Detalle.FindControl("TituloTextBox"), Label).Text = CType(frmvProyecto_Detalle.FindControl("TituloTextBox"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         'CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lbllink"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         'CType(frmvProyecto_Detalle.FindControl("lblImpactosEsperadosST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblImpactosEsperadosST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
         'CType(frmvProyecto_Detalle.FindControl("lblUsuarioTTST"), Label).Text = CType(frmvProyecto_Detalle.FindControl("lblUsuarioTTST"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
@@ -673,4 +675,198 @@ Partial Class TemasRelacionados
 
 
 
+    Protected Sub ibtnNuevoPG_Click(sender As Object, e As ImageClickEventArgs)
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("pnlProgramaPagoPPAdd"), Panel).Visible = Not CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("pnlProgramaPagoPPAdd"), Panel).Visible
+    End Sub
+
+    Private Sub LimpiarProgramaPago()
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("txtMontoPGAdd"), TextBox).Text = String.Empty
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpGastoPGAdd"), UpdatePanel).FindControl("ddlTipoGastoPGAdd"), DropDownList).SelectedIndex = -1
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpGastoPGAdd"), UpdatePanel).FindControl("ddlGastoPGAdd"), DropDownList).SelectedIndex = -1
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpFechaProgPGAdd"), UpdatePanel).FindControl("dtpkFechaProgPGAdd"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text = String.Empty
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpFechaRealPGAdd"), UpdatePanel).FindControl("dtpkFechaRealPGAdd"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text = String.Empty
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpFechaSolPGAdd"), UpdatePanel).FindControl("dtpkFechaSolPGAdd"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text = String.Empty
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("txtClabePGAdd"), TextBox).Text = String.Empty
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpEdoMpioPGAdd"), UpdatePanel).FindControl("ddlEstadoPGAdd"), DropDownList).SelectedIndex = -1
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpEdoMpioPGAdd"), UpdatePanel).FindControl("ddlMpioPGAdd"), DropDownList).SelectedIndex = -1
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("txtNumFacturaPGAdd"), TextBox).Text = String.Empty
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpFechaEntPGAdd"), UpdatePanel).FindControl("dtpkFechaEntPGAdd"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text = String.Empty
+        'CType(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("updpFechaConPGAdd"), UpdatePanel).FindControl("dtpkFechaConPGAdd"), EclipseWebSolutions.DatePicker.DatePicker).txtDate.Text = String.Empty
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("txtObservacionesPGAdd"), TextBox).Text = String.Empty
+    End Sub
+
+    Protected Sub ibtnAdministrativoCancelar_Click(sender As Object, e As ImageClickEventArgs)
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("pnlProgramaPagoPPAdd"), Panel).Visible = False
+        LimpiarProgramaPago()
+    End Sub
+
+    Protected Sub ibtnGuardarPGAdd_Click(sender As Object, e As ImageClickEventArgs)
+        Dim taAdmPago As New dsAppTableAdapters.Temas_Relacionados_ProductosTableAdapter
+        Dim boolAgregarRegistro As Boolean = True
+        Dim NewNameArchivo As String = String.Empty
+        'Obtener los datos para agregar
+        Dim id_tema As String = CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("hdCveProyectoAdmEdt"), HiddenField).Value
+        'Dim CveEtapa As Integer = Convert.ToInt32(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ddlCveEtapaAdd"), DropDownList).SelectedValue)
+        Dim txtTitulo As String = CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("txtTituloAdd"), TextBox).Text
+        Dim objChorizoFile_FileUpload As FileUpload = CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("flupPagosAdd"), FileUpload)
+
+        If objChorizoFile_FileUpload.HasFile Then
+            'El nombre formado de Proyecto+Etapa+FechaActual
+            NewNameArchivo = "Adm_" & id_tema & "_" & Now().ToString("yyyy-MM-dd_hhmmss")
+            'Extencion de archivo
+            NewNameArchivo = NewNameArchivo & objChorizoFile_FileUpload.FileName.Substring(objChorizoFile_FileUpload.FileName.LastIndexOfAny("."))
+
+            'Verificar que no sobrepase el tamaño del archivo permitido
+            If objChorizoFile_FileUpload.FileBytes.Length <= CInt(System.Web.Configuration.WebConfigurationManager.AppSettings("MaxBytesArchivo").ToString) Then
+                Try
+                    objChorizoFile_FileUpload.SaveAs(Server.MapPath(PathProducts) & NewNameArchivo)
+                Catch ex As Exception
+                    Response.Write("error al intentar guardar el archivo: " & ex.Message)
+                End Try
+            End If
+        End If
+        Try
+            taAdmPago.Insert(id_tema, txtTitulo, Now, PathProducts & NewNameArchivo)
+            Response.Redirect("~/TemasRelacionados.aspx")
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Protected Sub dtlProyectoProgPagoPG_CancelCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataListCommandEventArgs)
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("pnlProgramaPagoPPAdd"), Panel).Visible = False
+        LimpiarProgramaPago()
+        CType(source, DataList).EditItemIndex = -1
+        CType(source, DataList).SelectedIndex = -1
+        CType(source, DataList).DataBind()
+    End Sub
+
+    Protected Sub dtlProyectoProgPagoPG_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("pnlProgramaPagoPPAdd"), Panel).Visible = False
+        LimpiarProgramaPago()
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("odsPoryectoProgPagoPG"), ObjectDataSource).FilterExpression = grdvProyectos.DataKeyNames(0) & " = '" & grdvProyectos.DataKeys(grdvProyectos.EditIndex).Value & "' AND " & CType(sender, DataList).DataKeyField.ToString & " = " & CType(sender, DataList).DataKeys(CType(sender, DataList).SelectedIndex)
+        'CType(sender, DataList).SelectedIndex = 0
+        CType(sender, DataList).DataBind()
+        'CType(CType(sender, DataList).Controls.Item(CType(sender, DataList).SelectedIndex + 1).FindControl("lblObservacionesPGSel"), Label).Text = CType(CType(sender, DataList).Controls.Item(CType(sender, DataList).SelectedIndex + 1).FindControl("lblObservacionesPGSel"), Label).Text.Replace(Chr(13) & Chr(10), "<br>")
+        'SelPestaniaProgramaPago()
+    End Sub
+
+    Protected Sub dtlProyectoProgPagoPG_EditCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataListCommandEventArgs)
+        CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("pnlProgramaPagoPPAdd"), Panel).Visible = False
+        LimpiarProgramaPago()
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("odsPoryectoProgPagoPG"), ObjectDataSource).FilterExpression = grdvProyectos.DataKeyNames(0) & " = '" & grdvProyectos.DataKeys(grdvProyectos.EditIndex).Value & "' AND " & CType(source, DataList).DataKeyField.ToString & " = " & CType(source, DataList).DataKeys(e.Item.ItemIndex)
+        'CType(source, DataList).EditItemIndex = 0
+        CType(source, DataList).EditItemIndex = e.Item.ItemIndex
+        CType(source, DataList).DataBind()
+    End Sub
+
+    Private Sub SelPestaniaProgramaPago()
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDatosGeneralesEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_dg_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEtapasEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_et_rep.gif"
+        ''**ELIMINADO** CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnProblematicasEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_pr_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnParticipantesEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_pa_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEspeciesEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_es_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnEstadosEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_st_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDetalleMontoEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_dm_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnDifusionDivulgaEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_dd_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnVisitasTecnicasEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_vt_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnSeguimientoEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_sg_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnAdministrativoEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_ad_sel.gif"
+        ''CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("ibtnInfraestructuraEdt"), ImageButton).ImageUrl = "~/images/aplicacion/pestana_in_rep.gif"
+        'CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("mviewProyectosEdt"), MultiView).SetActiveView(CType(grdvProyectos.Rows(grdvProyectos.EditIndex).FindControl("viewAdministrativoEdt"), View))
+    End Sub
+
+    Protected Sub dtlProductosST_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataListCommandEventArgs)
+        Select Case e.CommandName
+            Case "Download"
+                Dim strArchivo() As String = e.CommandArgument.ToString.Split("|")
+                Dim taEtapaProducto As New dsAppTableAdapters.Temas_Relacionados_ProductosTableAdapter
+
+                Dim CveProyecto As String = strArchivo(0)
+                Dim Titulo As String = strArchivo(2)
+                Dim NumeroFile As Integer = 0
+                Try
+                    '********* LUIS RANGEL ************
+                    'Obtener los datos de la DB
+                    Dim rowProducto As dsApp.Temas_Relacionados_ProductosRow = taEtapaProducto.GetTemaTituloCat(Integer.Parse(CveProyecto), Titulo)(0)
+                    Dim arrArchivo() As String = rowProducto.Ruta.Split("|")
+                    'Entra el Polo
+                    'Esta instrucción da un problema si el nombre del archivo contiene espacios (LVC)
+                    'Response.AddHeader("content-disposition", "attachment; filename=" & strArchivo(3).Substring(strArchivo(3).LastIndexOf("/") + 1))
+                    'No es la mejor solución, pero es cómoda (LVC)
+                    Response.AddHeader("content-disposition", "attachment; filename=" & arrArchivo(NumeroFile).Replace(" ", "_"))
+                    'Sale el Polo
+                    'Encontrar el archivo
+
+                    'PathProducts
+                    Response.TransmitFile(Server.MapPath(arrArchivo(NumeroFile)))
+
+                    Response.End()
+                    '********* FIN LUIS RANGEL *********
+                Catch concurrencyEx As DBConcurrencyException
+                Catch constraintEx As ConstraintException
+                Catch deletedRowEx As DeletedRowInaccessibleException
+                Catch duplicateNameEx As DuplicateNameException
+                Catch inRowChangingEx As InRowChangingEventException
+                Catch invalidConstraintEx As InvalidConstraintException
+                Catch invalidExpressionEx As InvalidExpressionException
+                Catch missingPrimaryEx As MissingPrimaryKeyException
+                Catch noNullEx As NoNullAllowedException
+                Catch readOnlyEx As ReadOnlyException
+                Catch rowNotInTableEx As RowNotInTableException
+                Catch strongTypingEx As StrongTypingException
+                Catch typedDataSetEx As TypedDataSetGeneratorException
+                Catch versionNotFoundEx As VersionNotFoundException
+                Catch dataEx As DataException
+                Catch ex As Exception
+                Finally
+                    taEtapaProducto.Dispose()
+                End Try
+
+
+            Case Else
+                Exit Select
+        End Select
+    End Sub
+
+
+    '***** Luis RANGEL 2008/02/09 ****
+    Protected Sub dtlProductosST_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataListItemEventArgs)
+
+        If (e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem) Then
+
+            Dim rowProducto As dsApp.Temas_Relacionados_ProductosRow
+            'obtiene los datos
+            rowProducto = CType(CType(e.Item.DataItem, System.Data.DataRowView).Row, dsApp.Temas_Relacionados_ProductosRow)
+            Try
+                'Mostrar el control por cada archivo
+                Dim contador As Integer = 0
+                For Each strArchivo As String In rowProducto.Ruta.Split("|")
+                    Dim tmpbtn As ImageButton = CType(e.Item.FindControl("imgbArch" & contador.ToString), ImageButton)
+                    tmpbtn.CommandName = "Download"
+                    tmpbtn.CommandArgument = rowProducto.id_tema & "|" & _
+                                           rowProducto.Titulo.ToString() & "|" & _
+                                           rowProducto.Fecha.ToString() & "|" & _
+                                           contador.ToString()
+                    tmpbtn.Visible = True
+                    tmpbtn.ToolTip = strArchivo
+                    contador = contador + 1
+                Next strArchivo
+                'Ocultar los que falten
+                If (contador < 9) Then
+                    For i As Integer = contador To 9
+                        Dim tmpbtn As ImageButton = CType(e.Item.FindControl("imgbArch" & i.ToString), ImageButton)
+                        tmpbtn.Visible = False
+                    Next i
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+    '**** FIN LUIS RANGEL ******
+
+    Protected Sub linkLabel_Click(sender As Object, e As EventArgs)
+        
+    End Sub
 End Class

@@ -111,7 +111,7 @@
                                             </tr>
                                             <tr>
                                                 <td align="left" style="width: 30%">
-                                                    Región de seguimiento</td>
+                                                    Región o Estado de seguimiento</td>
                                                 <td align="left" style="width: 70%">
                                                     <asp:DropDownList ID="ddlRegionSegBuscar" runat="server" DataSourceID="odsRegionBuscar" DataTextField="DesRegion" DataValueField="CveRegion" Width="300px">
                                                     </asp:DropDownList><asp:ObjectDataSource ID="odsRegionBuscar" runat="server" OldValuesParameterFormatString="original_{0}"
@@ -266,8 +266,8 @@
                             PropertyName="SelectedValue" Type="Int32" />
                         <asp:ControlParameter ControlID="ddlInstitucionBuscar" Name="CveInstitucion" 
                             PropertyName="SelectedValue" Type="Int32" />
-                       <%--  <asp:ControlParameter ControlID="ddlTipoProyectoFill" Name="TipoProy" 
-                            PropertyName="SelectedValue" Type="Int32" />--%>
+                         <asp:ControlParameter ControlID="ddlTipoProyectoFill" Name="TipoProy" 
+                            PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>
                     
                 </asp:ObjectDataSource>
@@ -589,7 +589,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td style="width: 30%">
-                                                            Gerencia regional de seguimiento</td>
+                                                            Estado o Gerencia regional de seguimiento</td>
                                                         <td style="width: 70%">
                                                             <asp:DropDownList ID="ddlRegionSegEdt" runat="server" DataSourceID="odsRegionDDLEdt"
                                                                 DataTextField="DesRegion" DataValueField="CveRegion" SelectedValue='<%# Bind("CveRegion") %>'
