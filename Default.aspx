@@ -10,7 +10,7 @@
             margin:auto;
             display: inline-block;
             position: relative;
-            border-radius:2%;          
+            border-radius:2%;           
         }
 
         .registro {
@@ -28,10 +28,10 @@
             line-height: 22px;
             position: absolute;
             top: 8%;
-            width: 70%;
-            left: 20%;
+            width: 67%;
+            left: 24%;
             float:right;
-        }
+        }  
         .labusu{
             top: 8%;
             left: 1%;
@@ -44,8 +44,8 @@
             line-height: 22px;
             position: absolute;
             top: 20%;
-            width: 70%;
-            left: 20%;
+            width: 67%;
+            left: 24%;
             float:right;
         }
         .labcon{
@@ -103,13 +103,13 @@
         }
 
         .olvido {
-            bottom: 239px;
+            bottom: 45%;
             left: 18px;
             position: absolute;
         }
 
         .ayuda {
-            bottom: 239px;
+            bottom: 45%;
             position: absolute;
             right: 59px;
         }
@@ -130,18 +130,22 @@
 <div class="row-centralcontent">
 
     <div class="col1">
-        
-
-        <br /><br />
+      
          <%--<h3>Sistema de control y seguimientos de proyectos </h3>--%>
-         <p>El SCS constituye una herramienta de ayuda para el manejo y gestión integral de la información relacionada 
-         con los proyectos de Investigación y desarrollo Tecnológico.</p>
-        <br /><br />
+        <p>El Sistema de Control y Seguimiento de Proyectos de Desarrollo, Transferencia de
+        Tecnología e Investigación es una herramienta para difundir y compartir el conocimiento
+        en el área forestal que se genera con los fondos gestionados por la Comisión Nacional
+        Forestal.</p>
+        <p>Esta herramienta se concibió para sistematizar el seguimiento y divulgación de los
+        resultados de los distintos proyectos, que se apoyan con el fin de generar bienestar
+        y opciones de desarrollo para todos los mexicanos, y en especial a aquellas personas
+        que residen, laboren, estudien, se interesen o realicen cualquier actividad dentro
+        el sector forestal mexicano</p>     
+        <br />
         <h3>Entre sus alcances se encuentra:</h3>
 
         <ul>
-        <li>Inventario de proyectos</li>
-        <li>Seguimiento administrativo</li>
+        <li>Inventario de proyectos</li>      
         <li>Seguimiento técnico</li>
         <li>Reportes y estadísticas</li>
         <li>Productos</li>
@@ -185,7 +189,7 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtUsuario" ErrorMessage="Solo letras o numeros" ValidationExpression="^([a-zA-Z]|[0-9])+$">*</asp:RegularExpressionValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtContrasenia" ErrorMessage="Solo se permiten letras y numeros" ValidationExpression="^([a-zA-Z]|[0-9])+$">*</asp:RegularExpressionValidator>
                 <br /><br />
-                <div class="videos" style="margin-top:52%; margin-left:5%;">
+                <div class="videos" style="margin-top:47%; margin-left:5%;">
                    <%-- <iframe width="95%" height="100%" src="https://youtu.be/FEb9BlcnFl8" frameborder="1" allowfullscreen></iframe>--%>
                      <iframe width="95%" height="100%" src="https://www.youtube.com/embed/FEb9BlcnFl8?rel=0&autoplay=1" frameborder="1" allowfullscreen></iframe>
                 </div>

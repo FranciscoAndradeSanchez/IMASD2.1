@@ -38,7 +38,7 @@
 
                     <div id="logos" class="logotipos" style="width:100%; height:90px;" >                                 
                                 <ul id="listado1" >
-                                    <li style="float:left; width:450px;"><div class="encabezado_titulo" ><h3>Sistema de Control y Seguimiento de Proyectos de Desarrollo, Transferencia de Tecnología e Investigación</h3></div></li>
+                                    <li style="float:left; width:550px;"><div class="encabezado_titulo" ><h3 style="font-size:22px;">Sistema de Control y Seguimiento de Proyectos de Desarrollo, Transferencia de Tecnología e Investigación</h3></div></li>
                                     <li style="width: 50%; float: right; height: 90px; margin-top: 10px;">
                                         <ul id="listado2" style="float:right;">
                                             <li ><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="images/2014/semarnat_150.png" width="25%" height="10%" alt=""  /></a></li>
@@ -118,20 +118,20 @@
                                     <br />
                                     <small>Gerencia de Desarrollo y Transferencia de Tecnología. 
                                         Comisión Nacional Forestal. Carretera Nogales Esq. Periférico pte. #5360 Col. San Juan de Ocotán 
-                                        Zapopan, Jalisco, http://www.conafor.gob.mx
+                                        Zapopan, Jalisco, http://www.gob.mx/conafor
                             
                                     </small>
                                 </div>
                            
                                 
-                            <div class="enlaces" style="top: 0px; left: 0px;">
-                                      <p style="text-align:center; margin-top=0%; margin-bottom=0;">
+                            <div class="enlaces" style="top: 0px; left: 0px; ">
+                                      <p style="text-align:center; margin-top=0%; margin-bottom=0; height:10%">
                                         <span class="videos-link"><strong style="color:white;">Sitios Relacionados</strong> </span>
                                       </p>
-		              	            <ul>      
-                                                        <li><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/redes.jpg" width="25%" height="50" alt=""></a></li>
-                                                        <li><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/CEVMF.jpeg" width="25%" height="50" alt=""></a></li>
-                                                        <li><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/revista.jpg" width="25%" height="50" alt=""></a></li>                           
+		              	            <ul style="align-items: center;">      
+                                                        <li><a href="http://www.conacyt.gob.mx/" target="_blank"><img src="imagenes/redes.jpg" width="32%" height="70" alt=""></a></li>
+                                                        <li><a href="http://www.gob.mx/conafor" target="_blank"><img src="imagenes/CEVMF.jpeg" width="32%" height="70" alt=""></a></li>
+                                                        <li><a href="http://www.conacyt.mx/index.php/fondos-y-apoyos/fondos-sectoriales" target="_blank"><img src="imagenes/revista.jpg" width="32%" height="70" alt=""></a></li>                           
                                                        
                                     </ul>
 		                    </div>
@@ -141,7 +141,7 @@
                    
 
             </div><!-- /contenedor-->
-       
+           
         </div><!-- /cuerpo_pagina-->
 
     

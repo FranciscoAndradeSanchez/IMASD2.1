@@ -527,9 +527,9 @@ Partial Class RegistroProyectos
         pnlMasOpcionesBusqueda.Visible = Not pnlMasOpcionesBusqueda.Visible
         ibtnBuscarProyectos.Visible = Not pnlMasOpcionesBusqueda.Visible
         If pnlMasOpcionesBusqueda.Visible Then
-            lnkbMasOpciones.Text = "- ocultar opciones"
+            lnkbMasOpciones.Text = "- ocultar opciones de Busqueda"
         Else
-            lnkbMasOpciones.Text = "+ mas opciones ..."
+            lnkbMasOpciones.Text = "Busqueda Avanzada..."
         End If
         txtCveCONACYTBuscar.Text = String.Empty
         ddlTipoApoyoBuscar.SelectedValue = "--"

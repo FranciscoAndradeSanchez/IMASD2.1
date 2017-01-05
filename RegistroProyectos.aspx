@@ -6,7 +6,7 @@
     TagPrefix="ews" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphPrincipalInterna" Runat="Server">
-<asp:ScriptManager ID="scrmInfoGeneral" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="scrmInfoGeneral" runat="server"></asp:ScriptManager>
 <asp:MultiView ID="mviewProyectos" runat="server">
     <asp:View ID="viewLista" runat="server">
     <table width="100%" align="center">
@@ -33,7 +33,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 30%">
+                                <td style="width: 30%"> 
 
                                 </td>
                                 <td align="left" valign="middle" style="width: 54%">
@@ -41,7 +41,7 @@
                                     <asp:RegularExpressionValidator ID="revNombreProyectoEdt" runat="server" ControlToValidate="txtBusqueda" ErrorMessage="Texto a buscar tiene caracteres no permitidos"
                                     ForeColor="" ToolTip="Texto a buscar tiene caracteres no permitidos" ValidationExpression="^[0-9a-zA-ZñÑÁáÉéÍíÓóÚúÜü/°\s!\x22\#\$%\x26'()*\+,\-.¿?¡:;_\\\d\n]{0,}$">x</asp:RegularExpressionValidator>
                                     <asp:ImageButton ID="ibtnBuscarProyectos" runat="server" ImageUrl="~/images/aplicacion/btnBuscar.gif" /></td>
-                                    <td style="width: 16%"><asp:LinkButton ID="lnkbMasOpciones" runat="server" OnClick="lnkbMasOpciones_Click">+ más opciones ...</asp:LinkButton></td>
+                                    <td style="width: 16%"><asp:LinkButton ID="lnkbMasOpciones" runat="server" OnClick="lnkbMasOpciones_Click">Busqueda Avanzada...</asp:LinkButton></td>
                             </tr>
                             <tr>
                                 

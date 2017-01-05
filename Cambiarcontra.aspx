@@ -27,7 +27,9 @@
                         <asp:RequiredFieldValidator ID="rfvContraseniAnt" runat="server" ErrorMessage="La contraseña anterior es obligatoria"
                             ToolTip="La contraseña anterior es obligatoria" ControlToValidate="txtContraseniaAnt" ForeColor="">x</asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="cusvContraseniaAntAU" runat="server" ErrorMessage="La contraseña anterior no es correcta"
-                            ToolTip="La contraseña anterior no es correcta" ControlToValidate="txtContraseniaAnt" ForeColor="">x</asp:CustomValidator></td>
+                            ToolTip="La contraseña anterior no es correcta" ControlToValidate="txtContraseniaAnt" ForeColor="">x</asp:CustomValidator>
+                       
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 30%">
@@ -78,7 +80,7 @@
     </tr>
                 <tr>
                     <td colspan="2">
-                        Indique su nueva contraseña, es necesario que confirme su nueva contraseña.</td>
+                       Indique su nueva contraseña la cual debe ser Alfanumérica, es necesario que confirme su nueva contraseña.</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="height: 1px">
@@ -92,7 +94,12 @@
                         <asp:RequiredFieldValidator ID="rfvNuevaContraseniaAE" runat="server" ErrorMessage="La nueva contraseña es requerida"
                             ToolTip="La nueva contraseña es requerida" ControlToValidate="txtConstraseniaNuevaAE" ForeColor="">x</asp:RequiredFieldValidator>
                         <asp:CustomValidator ID="cusvNuevaContraseniaAE" runat="server" ControlToValidate="txtConstraseniaNuevaAE"
-                            ErrorMessage="No fue posible reiniciar su contraseña" ToolTip="No fue posible reiniciar su contraseña" ForeColor="">x</asp:CustomValidator></td>
+                            ErrorMessage="No fue posible reiniciar su contraseña" ToolTip="No fue posible reiniciar su contraseña" ForeColor="">x</asp:CustomValidator>
+                        <%-- <asp:RegularExpressionValidator
+                        ID="revcontrasena1" runat="server" ControlToValidate="txtConstraseniaNuevaAE"
+                        ErrorMessage="La contraseña debe estar compuesta por letras y numeros" ToolTip="La contraseña debe estar compuesta por letras y numeros"
+                        ValidationExpression="^[a-zA-Z''-'ñÑÁáÉéÍíÓóÚúÜü\s]&[0-9]$" ForeColor="">x</asp:RegularExpressionValidator>--%>
+                    </td>
                 </tr>
                 <tr style="color: #000000">
                     <td style="width: 30%">
@@ -102,7 +109,12 @@
                         <asp:RequiredFieldValidator ID="rfvRNuevaContraseniaAE" runat="server" ErrorMessage="Vuelva a teclear su nueva contraseña"
                             ToolTip="Vuelva a teclear su nueva contraseña" ControlToValidate="txtRConstraseniaNuevaAE" ForeColor="">x</asp:RequiredFieldValidator>
                         <asp:CompareValidator ID="cvNuevaContraseniaAE" runat="server" ErrorMessage="Las contraseñas no coinciden"
-                            ToolTip="Las contraseñas no coinciden" ControlToValidate="txtRConstraseniaNuevaAE" ControlToCompare="txtConstraseniaNuevaAE" ForeColor="">x</asp:CompareValidator></td>
+                            ToolTip="Las contraseñas no coinciden" ControlToValidate="txtRConstraseniaNuevaAE" ControlToCompare="txtConstraseniaNuevaAE" ForeColor="">x</asp:CompareValidator>
+                        <%-- <asp:RegularExpressionValidator
+                        ID="revcontrasena2" runat="server" ControlToValidate="txtRConstraseniaNuevaAE"
+                        ErrorMessage="La contraseña debe estar compuesta por letras y numeros" ToolTip="La contraseña debe estar compuesta por letras y numeros"
+                        ValidationExpression="^[a-zA-Z''-'ñÑÁáÉéÍíÓóÚúÜü\s]&[0-9]$" ForeColor="">x</asp:RegularExpressionValidator>--%>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 30%">

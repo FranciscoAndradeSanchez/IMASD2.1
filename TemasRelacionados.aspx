@@ -212,7 +212,9 @@
                                                 <td>link:                   
                                                 </td>
                                                 <td>
-                                                    <a href="<%# String.Format(Bind("link"), Bind("link"))%>" target="_blank" > <asp:Label Text='<%# Bind("link")%>' runat="server" ID="linklabel2"> </asp:Label> </a>
+                                                    <a href="<%# Eval("link")%>" target="_blank" >
+                                                         <asp:Label Text='<%# Bind("link")%>' runat="server" ID="linklabel2"> </asp:Label> 
+                                                    </a>
 
                                                 </td>
                                             </tr>

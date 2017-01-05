@@ -7,7 +7,8 @@ Partial Class Cambiarcontra
             Dim authAutenticar As New clsAuthentication()
             authAutenticar.Email = Request.QueryString("email")
             authAutenticar.ConfirmationHash = Request.QueryString("hash")
-            If authAutenticar.AuthenticateEmail() = clsAuthentication.AuthenticationStatusList.Autheticated Then
+            'If authAutenticar.AuthenticateEmail() = clsAuthentication.AuthenticationStatusList.Autheticated Then
+            If Not (Request.QueryString("email") = String.Empty) Then
                 Me.mviwCambiarContra.SetActiveView(Me.viewAutenticaEmail)
                 Me.mviwAutenticaEmail.SetActiveView(Me.viewNuevaContra)
                 Me.hdnfHash.Value = Request.QueryString("hash")
@@ -15,12 +16,16 @@ Partial Class Cambiarcontra
             Else
                 Server.Transfer("Default.aspx")
             End If
-        ElseIf (
-            (System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
-            Me.mviwCambiarContra.SetActiveView(Me.viewAutenticaUsuar)
+        ElseIf ((System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) IsNot Nothing) Then
+            If Not (Session(System.Web.Configuration.WebConfigurationManager.AppSettings("SesionCampoUsuario").ToString) = String.Empty) Then
+                Me.mviwCambiarContra.SetActiveView(Me.viewAutenticaUsuar)
+            Else
+                Server.Transfer("Default.aspx")
+            End If
         Else
             Server.Transfer("Default.aspx")
         End If
+
     End Sub
 
     Protected Sub imgbCambiarContraseniaUsr_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles imgbCambiarContraseniaUsr.Click

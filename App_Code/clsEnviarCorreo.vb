@@ -210,23 +210,29 @@ Public Class clsEnviarCorreo
     End Sub
 
     Public Sub EnivioAviso()
-        remitente = System.Web.Configuration.WebConfigurationManager.AppSettings("Remitente").ToString
+        Try
+            Dim slthHashingPWD As New clsSaltedHashing()
+            remitente = System.Web.Configuration.WebConfigurationManager.AppSettings("Remitente").ToString
 
-        asunto = "Aviso De Privacidad"
-        Dim users As New dsUsuariosTableAdapters.CatUsuarioTableAdapter()
-        For Each u In users.GetUsuario()
-            destinatarios = u.Email
-            Cuerpo = "<p>Estimado " + u.Nombre + " " + u.APaterno + " " + u.Amaterno + " se la invita a ver el Aviso de Privacidad en el siguiente enlace para que este al tanto del mismo. Por su atencion Gracias  </p>"
-            ServidorSMTP = System.Web.Configuration.WebConfigurationManager.AppSettings("ServidorMail").ToString
-            PortSMTP = System.Web.Configuration.WebConfigurationManager.AppSettings("ServidorMailPORT").ToString
-            Dominio = System.Web.Configuration.WebConfigurationManager.AppSettings("NombreDominio").ToString
-            usuario = System.Web.Configuration.WebConfigurationManager.AppSettings("Usuario").ToString
-            contrasenia = System.Web.Configuration.WebConfigurationManager.AppSettings("PWDUsuario").ToString
-            TextoDesuscribir = "<p>Has recibido este correo porque estas registrado en un servicio que ofrece la Comisión Nacional Forestal</p>" & _
-                        "<p>Si deseas terminar tu suscripción a dicho servicio por favor ingresa a esta dirección</p><p><a href=""" & _
-                        System.Web.Configuration.WebConfigurationManager.AppSettings("URLDesuscribir").ToString & _
-                        """>" & System.Web.Configuration.WebConfigurationManager.AppSettings("URLDesuscribir").ToString & "</a></p>"
-            EnviarCorreo()
-        Next
+            asunto = "Aviso De Privacidad"
+            Dim users As New dsUsuariosTableAdapters.CatUsuarioTableAdapter()
+            For Each u In users.GetUsuario()
+                destinatarios = u.Email
+                Cuerpo = "<p>Estimado " + u.Nombre + " " + u.APaterno + " " + u.Amaterno + " se le informa que por motivos de seguridad su contraseña debe ser restablecida lo más pronto posible para tener acceso al  sistema, le agradecemos que lo haga a la brevedad posible. Gracias por su comprensión.  </p>"
+                ServidorSMTP = System.Web.Configuration.WebConfigurationManager.AppSettings("ServidorMail").ToString
+                PortSMTP = System.Web.Configuration.WebConfigurationManager.AppSettings("ServidorMailPORT").ToString
+                Dominio = System.Web.Configuration.WebConfigurationManager.AppSettings("NombreDominio").ToString
+                usuario = System.Web.Configuration.WebConfigurationManager.AppSettings("Usuario").ToString
+                contrasenia = System.Web.Configuration.WebConfigurationManager.AppSettings("PWDUsuario").ToString
+                TextoDesuscribir = "<p>Has recibido este correo porque estas registrado en un servicio que ofrece la Comisión Nacional Forestal</p>" & _
+                            "<p>Si deseas terminar tu suscripción a dicho servicio por favor ingresa a esta dirección</p><p><a href=""" & _
+                            System.Web.Configuration.WebConfigurationManager.AppSettings("URLDesuscribir").ToString & _
+                            """>" & System.Web.Configuration.WebConfigurationManager.AppSettings("URLDesuscribir").ToString & "</a></p>"
+                EnviarCorreo()
+            Next
+        Catch ex As Exception
+
+        End Try
+       
     End Sub
 End Class
