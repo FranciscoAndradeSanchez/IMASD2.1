@@ -129,7 +129,7 @@
 
 <div class="row-centralcontent">
 
-    <div class="col1">
+    <div class="col1"> 
       
          <%--<h3>Sistema de control y seguimientos de proyectos </h3>--%>
         <p>El Sistema de Control y Seguimiento de Proyectos de Desarrollo, Transferencia de
